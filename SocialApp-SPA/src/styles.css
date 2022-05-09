@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~materialize-css/dist/css/materialize.min.css";
+@import "assets/styles/my-style.css";
+
+@font-face {
+    font-family: 'Koulen-main';
+    src: url('./assets/fonts/Koulen-Regular.ttf');
+}
+@font-face {
+    font-family: 'Macondo-submain';
+    src: url('./assets/fonts/Macondo-Regular.ttf');
+}

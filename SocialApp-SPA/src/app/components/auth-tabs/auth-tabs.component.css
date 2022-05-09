@@ -1,0 +1,25 @@
+.card-panel {
+  margin: 0 0;
+}
+.bodyDiv {
+  height: 100vh;
+}
+
+div.bodyContainer {
+  margin-top: 50px !important;
+}
+
+.tabs a {
+  color: #00838f;
+  font-weight: bold;
+  font-size: 25px;
+  font-family: 'Koulen-main';
+}
+
+.tabs .active {
+  background: inherit !important;
+}
+
+.auth-content {
+  height: 50vh !important;
+}
