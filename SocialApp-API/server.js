@@ -1,11 +1,17 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const config = require("./config/config");
+const cookie = require("cookie-parser");
 
+const cors = require("cors");
 const app = express();
+
+app.use(cors());
+app.options("*", cors());
 
 app.use(express.json());
 app.use(express.urlencoded());
+app.use(cookie());
 
 mongoose.connect(
   config.databaseUrl,

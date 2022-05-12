@@ -2,7 +2,8 @@
   margin: 0 0;
 }
 .bodyDiv {
-  height: 100vh;
+  /* height: 100vh; */
+  background-color: #EF476F;
 }
 
 div.bodyContainer {
@@ -10,7 +11,7 @@ div.bodyContainer {
 }
 
 .tabs a {
-  color: #00838f;
+  color: #118AB2;
   font-weight: bold;
   font-size: 25px;
   font-family: 'Koulen-main';
@@ -21,5 +22,7 @@ div.bodyContainer {
 }
 
 .auth-content {
-  height: 50vh !important;
+  height: 70vh !important;
 }
+
+
