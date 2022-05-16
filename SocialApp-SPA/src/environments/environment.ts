@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api:'localhost:3000/api/socialapp'
+  api:'http://localhost:3000/api'
 };
 
 /*

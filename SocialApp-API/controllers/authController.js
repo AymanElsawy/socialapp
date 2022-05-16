@@ -53,7 +53,7 @@ module.exports = {
           const token = Jwt.sign({ user: user }, Config.secretForToken, {
             expiresIn: "1d",
           });
-          res.cookie('auth',token);
+          res.cookie("auth", token);
           return res.status(Http.StatusCodes.CREATED).json({
             message: "user created ",
             token: token,
@@ -66,5 +66,48 @@ module.exports = {
           });
         });
     });
+  },
+
+  async loginUser(req, res) {
+    if (!req.body.username || !req.body.password) {
+      return res
+        .status(Http.StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ message: "you must enter username and password" });
+    }
+
+    await User.findOne({ username: Helper.capitalize(req.body.username) })
+      .then((user) => {
+        if (!user) {
+          return res
+            .status(Http.StatusCodes.NOT_FOUND)
+            .json({ message: "username not found" });
+        }
+        return Bcryptjs.compare(req.body.password, user.password)
+          .then((result) => {
+            if (!result) {
+              return res
+                .status(Http.StatusCodes.NOT_ACCEPTABLE)
+                .json({ message: "password not correct" });
+            }
+             const token = Jwt.sign({ user: user }, Config.secretForToken, {
+               expiresIn: "1d",
+             });
+             res.cookie("auth", token);
+             return res.status(Http.StatusCodes.OK).json({
+               message: "user logged in ",
+               token: token,
+             });
+          })
+          .catch((err) => {
+            return res
+              .status(Http.StatusCodes.INTERNAL_SERVER_ERROR)
+              .json({ message: err.message });
+          });
+      })
+      .catch((err) => {
+        return res
+          .status(Http.StatusCodes.INTERNAL_SERVER_ERROR)
+          .json({ message: err.message });
+      });
   },
 };

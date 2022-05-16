@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~materialize-css/dist/css/materialize.min.css";
 @import "assets/styles/my-style.css";
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import "~animate.css/animate.min.css";
 
 @font-face {
     font-family: 'Koulen-main';

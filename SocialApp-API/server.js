@@ -1,12 +1,15 @@
-const express = require("express");
 const mongoose = require("mongoose");
 const config = require("./config/config");
 const cookie = require("cookie-parser");
-
+const express = require("express");
 const cors = require("cors");
 const app = express();
 
-app.use(cors());
+
+
+app.use(cors({
+  methods:['GET','POST']
+}));
 app.options("*", cors());
 
 app.use(express.json());

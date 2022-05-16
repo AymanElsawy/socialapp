@@ -1,0 +1,89 @@
+nav  {
+  background-color: #EF476F;
+}
+.sidenav{
+    background-color:#EF476F;
+}
+.sidenav li {
+    background-color:#EF476F;
+}
+
+.material-icons {
+  color: white !important;
+}
+.brand-logo img {
+  width: 190px;
+  }
+
+.logout{
+  color: white;
+  font-size: 17px;
+  font-weight: 500;
+  margin-top: 5px;  
+}
+
+.nav-content {
+  height: 235px;
+}
+
+.nav-div {
+  width: 300px;
+  height: auto;
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+ }
+
+.nav-div img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  text-align: center;
+  margin: 20px auto 0 auto;
+}
+
+.profile-name {
+  color: white;
+  font-size: 40px;
+  font-family: anton;
+  text-align: center;
+  margin: 5px auto 0 auto;
+}
+
+.side {
+  width: 300px;
+  height: auto;
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+ }
+.side img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 10px solid rgba(255, 255, 255, 0.3);
+  text-align: center;
+  margin-top: 24px;
+}
+.side .profile-name {
+  color: white;
+  font-size: 35px;
+  text-align: center;
+  margin: 0 auto;
+  }
+  .side .logout{
+  color: white;
+  font-size: 17px;
+  font-weight: 500;
+  margin: 0 auto;
+}
+.side-footer{
+    padding-top: 10px ;
+}
+.side-footer .material-icons{
+    margin: 0 5px;
+   }
+
+
+
