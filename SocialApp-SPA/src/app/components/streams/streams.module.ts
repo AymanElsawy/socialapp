@@ -5,16 +5,21 @@ import { CommonModule } from '@angular/common';
 
 import { StreamsRoutingModule } from './streams-routing.module';
 import { NavbarComponent } from '../navbar/navbar.component';
+import { LoadingComponent } from '../loading/loading.component';
 
 
 @NgModule({
   declarations: [
     StreamsComponent,
-    NavbarComponent
+    NavbarComponent,
+    LoadingComponent
   ],
   imports: [
     CommonModule,
     StreamsRoutingModule
+  ],
+  exports: [
+    LoadingComponent
   ],
   providers: [
     TokenService

@@ -1,3 +1,4 @@
+import { StreamsModule } from './../streams/streams.module';
 import { AuthService } from './../../services/auth.service';
 import { AuthTabsComponent } from './auth-tabs.component';
 import { NgModule } from '@angular/core';
@@ -19,7 +20,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     AuthRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StreamsModule
   ],
   providers: [
     AuthService

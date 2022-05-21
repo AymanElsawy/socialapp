@@ -13,6 +13,7 @@ export class SignupComponent implements OnInit {
 
   signupForm: FormGroup;
   errorMessage;
+  loading =false;
   constructor(private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
@@ -33,8 +34,12 @@ export class SignupComponent implements OnInit {
     this.authService.addUser(this.signupForm.value).subscribe(
       data => {
         // console.log(data);
-        this.tokenService.setToken(data.token)
-        this.router.navigate(['/streams'])
+        this.loading = true;
+        setTimeout(() => {
+          this.tokenService.setToken(data.token)
+          this.router.navigate(['/streams'])
+          this.loading= false
+        }, 2000);
       },
       err => {
         console.log(err);
