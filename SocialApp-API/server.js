@@ -28,6 +28,8 @@ mongoose.connect(
 );
 const authRoute = require("./routes/authRoute");
 app.use("/api", authRoute);
+const postRoute = require("./routes/postRoute");
+app.use("/api", postRoute);
 
 app.listen(3000, () => {
   console.log("server connected");

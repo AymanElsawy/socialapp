@@ -1,0 +1,21 @@
+.collection{
+    min-width: 280px;
+  }
+.collection-header{
+    max-height: 44px;
+    text-align: center;
+    padding: 10px 15px 10px 4px !important;
+    font-weight: 500 !important;
+    
+}
+span{
+    color: #073b4c !important;
+}
+.count{
+    margin-left: 5px;
+    color: #06d6a0 !important;
+    font-weight: initial !important;
+}
+.material-icons{
+    color: #073b4c;
+}
