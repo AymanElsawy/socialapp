@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PostService } from './../../services/post.service';
 import { TokenService } from './../../services/token.service';
 import { StreamsComponent } from './streams.component';
@@ -12,6 +12,7 @@ import { SideComponent } from '../side/side.component';
 import { PostComponent } from '../post/post.component';
 import { PostsComponent } from '../posts/posts.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TokenInterceptor } from 'src/app/services/token-interceptor';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   providers: [
     TokenService,
-    PostService
+    PostService,
+    {provide:HTTP_INTERCEPTORS,useClass:TokenInterceptor,multi:true}
   ]
 })
 export class StreamsModule { }

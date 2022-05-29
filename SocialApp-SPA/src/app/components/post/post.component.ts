@@ -23,9 +23,12 @@ export class PostComponent implements OnInit {
   addPost() {
     this.postService.addPost(this.postForm.value).subscribe(
       data => {
-        
+        console.log(data);
+        this.postForm.reset();
        },
-      err=>{}
+      err => {
+        console.log(err);
+      }
     )
   }
 
