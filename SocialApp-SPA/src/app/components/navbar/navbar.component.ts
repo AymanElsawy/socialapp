@@ -9,11 +9,13 @@ import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 })
 export class NavbarComponent implements OnInit , OnDestroy{
 
+  user;
   constructor(private tokenService: TokenService,private router:Router,private renderer:Renderer2) { }
 
   ngOnInit(): void {
     const navbar = document.querySelectorAll('.sidenav');
     var navbarElement = M.Sidenav.init(navbar, {});
+    this.user = this.tokenService.getPayload()
   }
   logOut() {
     this.tokenService.removeToken();

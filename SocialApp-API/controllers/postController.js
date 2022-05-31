@@ -15,7 +15,7 @@ module.exports = {
     }
     const newPost = {
       post: req.body.post, //req.body.post is the post from the client
-      userId: req.user._id, // userId is the id of the user who is logged in
+      user: req.user._id, // user is the id of the user who is logged in
       username: req.user.username, // this is the user who is logged in
       createdAt: new Date(), // new Date() is the current date and time
     };
@@ -40,4 +40,17 @@ module.exports = {
           .json({ message: err.message }); // 500
       });
   },
+
+  getAllPosts(req, res) {
+    try {
+      PostModel.find()
+        .sort({ createdAt: -1 })  // sort the posts in descending order by createdAt
+        .populate("user")  // populate the user field with the user's data
+        .then((posts) => {
+          return res.status(Http.StatusCodes.OK).json({ message:'All Posts',posts });  // 200 and the posts 
+        });
+    } catch (err){
+      return res.status(Http.StatusCodes.INTERNAL_SERVER_ERROR).json({ message: err.message }); // 500  
+    }
+  }
 };

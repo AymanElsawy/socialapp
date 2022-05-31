@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const postSchema = mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   username: { type: String, default: "" },
   post: { type: String, default: "" },
   comments: [
@@ -18,6 +18,7 @@ const postSchema = mongoose.Schema({
       username: { type: String, default: "" },
     },
   ],
+  createdAt: { type: Date, default: Date.now() },
 });
 
 module.exports = mongoose.model("Post", postSchema);

@@ -13,4 +13,7 @@ export class PostService {
   addPost(post):Observable<any> {
     return this.http.post(`${environment.api}/post/add-post`, post);
   }
+  getAllPosts():Observable<any> {
+    return this.http.get(`${environment.api}/post/get-all-posts`);
+  }
 }
