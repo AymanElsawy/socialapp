@@ -17,7 +17,7 @@
                     <p>{{post.post}}</p>
                 </div>
                 <div class="card-action">
-                    <i class="material-icons">thumb_up</i>
+                    <i class="material-icons" (click)="likePost(post)">thumb_up</i>
                     <span class="icon-span">{{post.totalLikes}}</span>
                     <i class="material-icons">comment</i>
                     <span class="icon-span">{{post.comments  .length}}</span>

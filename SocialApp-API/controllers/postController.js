@@ -44,13 +44,47 @@ module.exports = {
   getAllPosts(req, res) {
     try {
       PostModel.find()
-        .sort({ createdAt: -1 })  // sort the posts in descending order by createdAt
-        .populate("user")  // populate the user field with the user's data
+        .sort({ createdAt: -1 }) // sort the posts in descending order by createdAt
+        .populate("user") // populate the user field with the user's data
         .then((posts) => {
-          return res.status(Http.StatusCodes.OK).json({ message:'All Posts',posts });  // 200 and the posts 
+          return res
+            .status(Http.StatusCodes.OK)
+            .json({ message: "All Posts", posts }); // 200 and the posts
         });
-    } catch (err){
-      return res.status(Http.StatusCodes.INTERNAL_SERVER_ERROR).json({ message: err.message }); // 500  
+    } catch (err) {
+      return res
+        .status(Http.StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ message: err.message }); // 500
     }
-  }
+  }, //end of  getAllPosts
+
+  addLike(req, res) {
+    const id = req.body._id; // the id of the post that is being liked
+    PostModel.updateOne(
+      {
+        _id: id,
+        "likes.username": {
+          $ne: req.user.username, // if the user has not liked the post yet
+        },
+      },
+      {
+        $push: {
+          likes: {
+            username: req.user.username, // the username of the user who liked the post
+          },
+        },
+        $inc: {
+          totalLikes: 1, // increment the total likes by 1
+        },
+      }
+    )
+      .then((result) => {
+        return res.status(Http.StatusCodes.OK).json({ message: "Post liked" }); // 200 and the post liked
+      })
+      .catch((err) => {
+        return res
+          .status(Http.StatusCodes.INTERNAL_SERVER_ERROR)
+          .json({ message: err.message }); // 500
+      });  
+  }, // end of addLike
 };

@@ -4,7 +4,18 @@ const cookie = require("cookie-parser");
 const express = require("express");
 const cors = require("cors");
 const app = express();
+const httpServer = require('http').createServer(app);
+const { Server } = require('socket.io');
 
+const io = new Server(httpServer, {
+  cors: {
+    origin: '*',
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  }
+});
+
+require("./socket/stream")(io); 
 
 
 app.use(cors({
@@ -31,6 +42,6 @@ app.use("/api", authRoute);
 const postRoute = require("./routes/postRoute");
 app.use("/api", postRoute);
 
-app.listen(3000, () => {
+httpServer.listen(3000, () => {
   console.log("server connected");
 });

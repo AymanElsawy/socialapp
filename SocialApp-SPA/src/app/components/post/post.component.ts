@@ -1,6 +1,7 @@
 import { PostService } from './../../services/post.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import io from "socket.io-client";
 
 @Component({
   selector: 'app-post',
@@ -8,26 +9,30 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit {
-
   postForm: FormGroup;
-  constructor(private fb: FormBuilder, private postService:PostService) { }
+  socket;
+  constructor(private fb: FormBuilder, private postService: PostService) { 
+    this.socket = io('http://localhost:3000'); // connect to socket.io server
+  }
 
   ngOnInit(): void {
-    this.init();
+    this.init(); // initialize form 
   }
   init() {
     this.postForm = this.fb.group({
-      post:['',Validators.required]
+      post:['',Validators.required] // post field with validators
     })
   }
   addPost() {
     this.postService.addPost(this.postForm.value).subscribe(
       data => {
         console.log(data);
-        this.postForm.reset();
+        this.socket.emit('refresh',{message:'refresh page'}); // emit event to refresh page
+        this.postForm.reset(); // reset form
+        
        },
       err => {
-        console.log(err);
+        console.log(err);  // error handling
       }
     )
   }

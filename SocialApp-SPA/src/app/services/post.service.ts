@@ -11,9 +11,12 @@ export class PostService {
   constructor(private http: HttpClient) { }
   
   addPost(post):Observable<any> {
-    return this.http.post(`${environment.api}/post/add-post`, post);
+    return this.http.post(`${environment.api}/post/add-post`, post); // post post to server
   }
   getAllPosts():Observable<any> {
-    return this.http.get(`${environment.api}/post/get-all-posts`);
+    return this.http.get(`${environment.api}/post/get-all-posts`); // get all posts from server
+  }
+  addLike(postId):Observable<any> {
+    return this.http.post(`${environment.api}/post/like-post`,postId); // like post on server
   }
 }
