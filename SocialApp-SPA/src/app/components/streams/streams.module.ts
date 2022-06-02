@@ -32,7 +32,9 @@ import { TokenInterceptor } from 'src/app/services/token-interceptor';
     HttpClientModule
   ],
   exports: [
-    LoadingComponent
+    LoadingComponent,
+    NavbarComponent,
+    SideComponent
   ],
   providers: [
     TokenService,

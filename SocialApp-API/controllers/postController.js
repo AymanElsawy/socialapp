@@ -87,4 +87,49 @@ module.exports = {
           .json({ message: err.message }); // 500
       });  
   }, // end of addLike
+
+  addComment(req, res) {
+    const id = req.body.postId; // the id of the post that is being commented on
+    const comment = req.body.comment; // the comment that is being added
+    PostModel.updateOne(
+      {
+        _id: id,
+      },
+      {
+        $push: {
+          comments: {
+            comment: comment, // the comment that is being added
+            username: req.user.username, // the username of the user who commented on the post
+            userId: req.user._id, // the id of the user who commented on the post
+          },
+        },
+      }
+    )
+      .then((result) => {
+        return res
+          .status(Http.StatusCodes.OK)
+          .json({ message: "Comment added" }); // 200 and the comment added
+      })
+      .catch((err) => {
+        return res
+          .status(Http.StatusCodes.INTERNAL_SERVER_ERROR)
+          .json({ message: err.message }); // 500
+      });
+  }, // end of addComment
+
+  getAllComments(req, res) {
+    const id = req.params.id; // the id of the post that is being commented on
+    PostModel.findById(id)
+      .populate("comments.userId") // populate the userId field with the user's data
+      .then((post) => {
+        return res
+          .status(Http.StatusCodes.OK)
+          .json({ message: "All Comments", post }); // 200 and the comments
+      })
+      .catch((err) => {
+        return res
+          .status(Http.StatusCodes.INTERNAL_SERVER_ERROR)
+          .json({ message: err.message }); // 500
+      });
+  }
 };

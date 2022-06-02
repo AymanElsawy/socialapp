@@ -7,14 +7,13 @@
   font-size: 14px;
   color: #06d6a0;
 }
-.post-text{
-    padding:  15px 5px !important;
-   }
-   
+.post-text {
+  padding: 15px 5px !important;
+}
+
 .icon-Span {
   font-size: 22px;
   margin-right: 10px;
-  
 }
 
 .material-icons {
@@ -24,14 +23,15 @@
   margin-left: 10px;
 }
 
-.card-action{
+.card-action {
   border: none !important;
-  padding-top: 0 !important; 
-  margin-left:-25px !important; 
+  padding-top: 0 !important;
+  margin-left: -25px !important;
 }
 
 .collection {
   border: none !important;
 }
-
-
+.liked {
+  color: #ffc107;
+}

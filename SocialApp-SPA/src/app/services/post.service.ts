@@ -19,4 +19,11 @@ export class PostService {
   addLike(postId):Observable<any> {
     return this.http.post(`${environment.api}/post/like-post`,postId); // like post on server
   }
+  addComment(postId,comment):Observable<any> {
+    return this.http.post(`${environment.api}/post/comment-post`,{postId,comment}); // comment post on server
+  }
+  getPostComments(postId):Observable<any> {
+    return this.http.get(`${environment.api}/post/${postId}`); // get post comments on server
+  }
+  
 }

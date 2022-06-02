@@ -23,6 +23,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     StreamsModule
   ],
+  exports: [
+    ReactiveFormsModule,
+  ],
   providers: [
     AuthService
   ]
