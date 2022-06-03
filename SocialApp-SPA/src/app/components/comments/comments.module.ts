@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 
 import { CommentsRoutingModule } from './comments-routing.module';
 import { CommentsComponent } from './comments.component';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -15,7 +15,8 @@ import { CommentsComponent } from './comments.component';
     CommonModule,
     CommentsRoutingModule,
     StreamsModule,
-    AuthModule
+    AuthModule,
+    NgxPaginationModule
   ]
 })
 export class CommentsModule { }

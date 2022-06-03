@@ -1,21 +1,25 @@
-.collection{
-    min-width: 280px;
-  }
-.collection-header{
-    max-height: 44px;
-    text-align: center;
-    padding: 10px 15px 10px 4px !important;
-    font-weight: 500 !important;
-    
+.collection {
+  min-width: 280px;
 }
-span{
-    color: #073b4c !important;
+.collection-header {
+  max-height: 44px;
+  text-align: center;
+  padding: 10px 15px 10px 4px !important;
+  font-weight: 500 !important;
 }
-.count{
+
+.count {
+  color: #06d6a0 !important;
+    font-size: 18px !important;
     margin-left: 5px;
-    color: #06d6a0 !important;
-    font-weight: initial !important;
 }
-.material-icons{
-    color: #073b4c;
+a {
+  color: #073b4c;
+  font-weight: 600 !important;
+}
+.active a {
+  color: #ffd166 !important;
+}
+.active {
+  background-color: #ef476f !important;
 }

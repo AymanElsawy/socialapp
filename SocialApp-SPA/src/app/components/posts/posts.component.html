@@ -27,7 +27,9 @@
             >thumb_up</i
           >
           <span class="icon-span">{{ post.totalLikes }}</span>
-          <i class="material-icons" (click)="goToComments(post)">comment</i>
+          <i class="material-icons" [ngClass]="
+              !areYouLike(post.comments, user.username) ? 'notliked' : 'liked'
+            " (click)="goToComments(post)">comment</i>
           <span class="icon-span">{{ post.comments.length }}</span>
         </div>
       </div>
