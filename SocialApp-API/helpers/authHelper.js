@@ -3,15 +3,15 @@ const config = require("../config/config");
 const Http = require("http-status-codes");
 module.exports = {
   verfyToken(req, res, next) {
-    if (!req.headers.authorization) {
+    if (!req.headers.authorization) { // if there is no token
       return res
         .status(Http.StatusCodes.UNAUTHORIZED)
-        .json({ message: "Unauthorized request" }); // 401 and unauthorized request
+        .json({ message: "Unauthorized request !!" }); // 401 and unauthorized request
     }
     const token =
       req.cookies.auth || req.headers["authorization"].split(" ")[1]; // token is the token from the client
 
-    if (!token) {
+    if (!token) { // if there is no token
       return res
         .status(Http.StatusCodes.UNAUTHORIZED)
         .json({ message: "you are not logged in" }); // 401 and unauthorized request 

@@ -37,10 +37,14 @@ mongoose.connect(
     console.log("database connected");
   }
 );
-const authRoute = require("./routes/authRoute");
+const authRoute = require("./routes/authRoute"); // auth route
 app.use("/api", authRoute);
-const postRoute = require("./routes/postRoute");
+const postRoute = require("./routes/postRoute"); //post route
 app.use("/api", postRoute);
+const userRoute = require("./routes/userRoute"); // user route
+app.use("/api", userRoute);
+const friendRoute = require("./routes/friendRoute"); // friend route
+app.use("/api", friendRoute); 
 
 httpServer.listen(3000, () => {
   console.log("server connected");

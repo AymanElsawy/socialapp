@@ -57,7 +57,7 @@ export class CommentsComponent implements OnInit, AfterViewInit {
   getAllComments() {
     this.postService.getPostComments(this.postId).subscribe(data => {
       console.log(data);
-      this.comments = data.post.comments; // get all comments
+      this.comments = data.post.comments.reverse(); // get all comments
       this.post = data.post; // get post data
     });
   } // get all comments

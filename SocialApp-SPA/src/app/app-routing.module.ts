@@ -18,6 +18,11 @@ const routes: Routes = [
     loadChildren: () => import('./components/comments/comments.module').then(m => m.CommentsModule),
     canActivate: [AuthGuard]
   },
+  {
+    path: 'people',
+    loadChildren: () => import('./components/people/people.module').then(m => m.PeopleModule),
+    canActivate: [AuthGuard]
+  },
 ];
 
 @NgModule({

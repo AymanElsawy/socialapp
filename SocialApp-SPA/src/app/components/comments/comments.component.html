@@ -48,13 +48,21 @@
           </div>
         </form>
       </div>
-
-      <!-- <div class="col s12 center-align">
-        <pagination-controls
-          class="marg marg1 ng-margin removecontent-next removecontent-previous my-button my-pagination my-pag"
-          (pageChange)="p = $event"
-        ></pagination-controls>
-      </div> -->
+      <div class="row comments">
+        <ul
+          class="collection comment col s12 m10"
+          *ngFor="let comment of comments  | paginate: { itemsPerPage: 5, currentPage: p }"
+        >
+          <li class="collection-item avatar">
+            <img class="circle" src="http://placeimg.com/100/100/nature" />
+            <span class="title">{{ comment.username }}</span>
+            <p class="time">{{ timeAgo(comment.createdAt) }}</p>
+            <p class="post-comment">{{ comment.comment }}</p>
+          </li>
+        </ul>
+      </div>
+ <pagination-controls (pageChange)="p = $event" class="moka"></pagination-controls>
+     <!-- marg marg1 ng-margin removecontent-next removecontent-previous my-button my-pagination my-pag -->
     </div>
   </div>
 </div>
