@@ -1,19 +1,18 @@
 .card-panel {
   margin: 0 0;
   /* height: 100vh; */
-  background-color: #EF476F;
+  background-color: #235789;
 }
-
 
 div.bodyContainer {
   margin-top: 50px !important;
 }
 
 .tabs a {
-  color: #118AB2;
+  color: #118ab2;
   font-weight: bold;
   font-size: 25px;
-  font-family: 'Koulen-main';
+  font-family: "Koulen-main";
 }
 
 .tabs .active {
@@ -23,5 +22,3 @@ div.bodyContainer {
 .auth-content {
   height: 70vh !important;
 }
-
-

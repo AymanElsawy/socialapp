@@ -2,7 +2,7 @@ const UserModel = require("../models/userModel");
 const Http = require("http-status-codes");
 
 module.exports = {
-    getAllUsers(req,res) {
+  getAllUsers(req, res) {
     UserModel.find({})
       .populate("posts.postId") // populate the posts with the postId
       .populate("followers.follower") // populate the followers with the follower
@@ -16,11 +16,11 @@ module.exports = {
         return res
           .status(Http.StatusCodes.INTERNAL_SERVER_ERROR)
           .json(err.message); // 500
-      });;
+      });
   }, // getAllUsers
   getUser(req, res) {
-     const id = req.params.id
-    UserModel.find({_id:id})
+    const id = req.params.id;
+    UserModel.findOne({ _id: id })
       .populate("posts.postId") // populate the posts with the postId
       .populate("followers.follower") // populate the followers with the follower
       .populate("following.userfollowed") // populate the following with the userfollowed
@@ -33,6 +33,6 @@ module.exports = {
         return res
           .status(Http.StatusCodes.INTERNAL_SERVER_ERROR)
           .json(err.message); // 500
-      });;
-    } // getUser
+      });
+  }, // getUser
 };

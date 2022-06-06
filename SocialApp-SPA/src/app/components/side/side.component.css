@@ -10,16 +10,16 @@
 
 .count {
   color: #06d6a0 !important;
-    font-size: 18px !important;
-    margin-left: 5px;
+  font-size: 18px !important;
+  margin-left: 5px;
 }
 a {
-  color: #073b4c;
+  color: #235789;
   font-weight: 600 !important;
 }
 .active a {
   color: #ffd166 !important;
 }
 .active {
-  background-color: #ef476f !important;
+  background-color: #235789 !important;
 }

@@ -1,11 +1,11 @@
-nav  {
-  background-color: #EF476F;
+nav {
+  background-color: #235789;
 }
-.sidenav{
-    background-color:#EF476F;
+.sidenav {
+  background-color: #235789;
 }
 .sidenav li {
-    background-color:#EF476F;
+  background-color: #235789;
 }
 
 .material-icons {
@@ -14,13 +14,13 @@ nav  {
 .brand-logo img {
   width: 190px;
   margin-top: -15px;
-  }
+}
 
-.logout{
+.logout {
   color: white;
   font-size: 17px;
   font-weight: 500;
-  margin-top: -5px;  
+  margin-top: -5px;
 }
 
 .nav-content {
@@ -33,7 +33,7 @@ nav  {
   display: block;
   text-align: center;
   margin: 0 auto;
- }
+}
 
 .nav-div img {
   width: 150px;
@@ -58,7 +58,7 @@ nav  {
   display: block;
   text-align: center;
   margin: 0 auto;
- }
+}
 .side img {
   width: 140px;
   height: 140px;
@@ -72,19 +72,16 @@ nav  {
   font-size: 35px;
   text-align: center;
   margin: 0 auto;
-  }
-  .side .logout{
+}
+.side .logout {
   color: white;
   font-size: 17px;
   font-weight: 500;
   margin: 0 auto;
 }
-.side-footer{
-    padding-top: 10px ;
+.side-footer {
+  padding-top: 10px;
 }
-.side-footer .material-icons{
-    margin: 0 5px;
-   }
-
-
-
+.side-footer .material-icons {
+  margin: 0 5px;
+}

@@ -9,13 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   constructor(private tokenService: TokenService, private router: Router) { }
+  // ngOnInit(): void {
+  //   const token = this.tokenService.getToken()
+  //   if (token) {
+  //     this.router.navigate(['streams'])
+  //   } else {
+  //     this.router.navigate([''])
+  //   }
+  // }
   ngOnInit(): void {
-    const token = this.tokenService.getToken()
-    if (token) {
-      this.router.navigate(['streams'])
-    } else {
-      this.router.navigate([''])
-    }
+    
   }
   title = 'SocialApp-SPA';
 }

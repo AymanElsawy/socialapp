@@ -1,4 +1,4 @@
-import { StreamsModule } from './../streams/streams.module';
+import { LoadingComponent } from './../loading/loading.component';
 import { AuthService } from './../../services/auth.service';
 import { AuthTabsComponent } from './auth-tabs.component';
 import { NgModule } from '@angular/core';
@@ -7,22 +7,18 @@ import { CommonModule } from '@angular/common';
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from '../login/login.component';
 import { SignupComponent } from '../signup/signup.component';
-import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AuthTabsComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    LoadingComponent
   ],
   imports: [
     CommonModule,
     AuthRoutingModule,
-    ReactiveFormsModule,
-    StreamsModule
-  ],
-  exports: [
     ReactiveFormsModule,
   ],
   providers: [

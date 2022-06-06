@@ -1,6 +1,6 @@
 .title {
   font-weight: bold;
-  color: #073b4c;
+  color: #235789;
 }
 
 .time {
@@ -41,10 +41,10 @@
 }
 .post-div,
 .btn {
-  background-color: #ef476f;
+  background-color: #235789;
 }
 .btn:hover {
-  background-color: #ef476f;
+  background-color: #235789;
 }
 
 .material-icons {
@@ -57,4 +57,3 @@
 .collection {
   border: none !important;
 }
-

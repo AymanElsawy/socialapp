@@ -1,5 +1,5 @@
+import { SharedModule } from './../../shared/shared.module';
 
-import { StreamsModule } from './../streams/streams.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -16,8 +16,8 @@ import { TokenInterceptor } from 'src/app/services/token-interceptor';
   imports: [
     CommonModule,
     PeopleRoutingModule,
-    StreamsModule,
+    SharedModule,
   ],
-  providers:[{provide:HTTP_INTERCEPTORS,useClass:TokenInterceptor,multi:true}]
+  
 })
 export class PeopleModule { }

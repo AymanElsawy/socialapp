@@ -33,14 +33,13 @@ export class PeopleComponent implements OnInit {
     this.userService.getAllUsers().subscribe(data => {
       this.users = data['users'];   // get users from the server
       _.remove(this.users, { username: this.currentUser.username }); // remove current user from users array
-      console.log(this.users);
     }); // subscribe to get all users
   } // get all users
 
   getUser() {
     this.userService.getUser(this.currentUser._id).subscribe(data => {  // get user from server
-      console.log(data);
-      this.currentUserFollowing = data['user'][0].following; // get current user following
+      this.currentUserFollowing = data['user'].following; // get current user following
+      console.log(this.currentUserFollowing);
     }); // subscribe to get user
   } // get user
 
@@ -62,5 +61,5 @@ export class PeopleComponent implements OnInit {
     this.userService.followUser(userId).subscribe(data => { 
       this.socket.emit('refresh', { message: 'refresh page' }); // emit event to refresh page from socket.io server
      })
-  }
+  } // follow user
 }

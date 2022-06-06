@@ -1,11 +1,9 @@
-import { AuthModule } from './../auth-tabs/auth.module';
-import { StreamsModule } from './../streams/streams.module';
+import { SharedModule } from './../../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CommentsRoutingModule } from './comments-routing.module';
 import { CommentsComponent } from './comments.component';
-import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -14,9 +12,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
   imports: [
     CommonModule,
     CommentsRoutingModule,
-    StreamsModule,
-    AuthModule,
-    NgxPaginationModule
+    SharedModule,
   ]
 })
 export class CommentsModule { }
