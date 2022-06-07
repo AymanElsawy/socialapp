@@ -21,6 +21,16 @@ const userScheam = mongoose.Schema({
       createdAt: { type: Date, default: Date.now() }, // created at
     },
   ], // array of posts
+  notifications: [
+    {
+      senderId: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, // sender id
+      action: { type: String }, // action
+      viewProfile: { type: Boolean, default: false }, // view profile
+      createdAt: { type: Date, default: Date.now() }, // created at
+      read: { type: Boolean, default: false }, // read
+      date:{type:String,default:''}
+    }
+  ]
 });
 
 module.exports = mongoose.model("User", userScheam); // UserModel

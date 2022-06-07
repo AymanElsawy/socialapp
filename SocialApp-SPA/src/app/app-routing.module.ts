@@ -33,6 +33,11 @@ const routes: Routes = [
     loadChildren: () => import('./components/followers/followers.module').then(m => m.FollowersModule),
     canActivate: [AuthGuard]
   },
+  {
+    path: 'notifications',
+    loadChildren: () => import('./components/notifications/notifications.module').then(m => m.NotificationsModule),
+    canActivate: [AuthGuard]
+  },
 ];
 
 @NgModule({

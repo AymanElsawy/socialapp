@@ -20,6 +20,14 @@ export class UserService {
   unfollowUser(userfollowed) {
     return this.http.post(`${environment.api}/unfollow-user`, { userfollowed: userfollowed}); // unfollow user 
   }; // unfollow user 
+
+  markAsReadOrDelete(id , deleteIt?){
+  return this.http.post(`${environment.api}/mark/${id}`, {id,deleteIt} ); // mark as read or delete 
+  } // mark as read or delete
+
+  markAllAsRead() {
+    return this.http.post(`${environment.api}/mark-all`, {}); // mark all as read 
+  }// mark all as read 
 }
 
 
