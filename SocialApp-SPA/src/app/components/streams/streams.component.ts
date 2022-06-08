@@ -13,7 +13,9 @@ export class StreamsComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = this.tokenService.getPayload();
-    console.log(this.token);
+    const tabs = document.querySelectorAll('.tabs');
+    const instance = M.Tabs.init(tabs, {});
+
   }
 
 }

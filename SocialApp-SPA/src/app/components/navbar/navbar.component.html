@@ -1,11 +1,51 @@
 <nav class="nav-extended">
   <div class="container">
     <div class="nav-wrapper">
-      <a routerLink="/streams" class="brand-logo"><img src="assets/images/logo.png" /></a>
+      <a routerLink="/streams" class="brand-logo"
+        ><img src="assets/images/logo.png"
+      /></a>
       <a routerLink="/streams" data-target="mobile" class="sidenav-trigger"
         ><i class="material-icons">menu</i></a
       >
       <ul class="right hide-on-med-and-down">
+        <!-- Dropdown Trigger -->
+        <li class="dropdown-trigger" data-target="dropdown">
+          <div class="notification">
+            <i class="material-icons">notifications</i>
+            <span class="badge" *ngIf="unreadNotifications.length != 0">{{
+              unreadNotifications.length
+            }}</span>
+          </div>
+          <!-- Dropdown Structure -->
+          <ul id="dropdown" class="dropdown-content col s12 collection">
+            <li
+              class="collection-item avatar"
+              *ngFor="let notification of notifications"
+            >
+              <img class="circle" src="http://placeimg.com/200/200/nature" />
+              <span
+                class="title"
+                [ngStyle]="{
+                  'font-weight': notification.read ? 'normal' : 'bold'
+                }"
+                >{{ notification.action }}</span
+              >
+              <p class="time">{{ timeAgo(notification.createdAt) }}</p>
+            </li>
+            <li class="collection-item" *ngIf="notifications.length == 0">
+              <p class="center">No notification</p>
+            </li>
+            <li class="collection-item">
+              <button
+                class="waves-effect btn mark-all"
+                (click)="markAllAsRead()"
+              >
+                mark all as read
+              </button>
+            </li>
+          </ul>
+        </li>
+
         <li>
           <a class="logout waves-effect" (click)="logOut()"
             ><i class="material-icons left">power_settings_new</i> LOGOUT</a
@@ -18,14 +58,14 @@
       <div class="nav-div">
         <img class="circle responsive-img" src="http://placeimg.com/100/100" />
       </div>
-      <h1 class="profile-name">{{user.username}}</h1>
+      <h1 class="profile-name">{{ currentUser.username }}</h1>
     </div>
   </div>
 </nav>
 <ul id="mobile" class="sidenav">
   <li class="side">
     <img class="circle responsive-img" src="http://placeimg.com/100/100" />
-    <h1 class="profile-name">{{user.username}}</h1>
+    <h1 class="profile-name">{{ currentUser.username }}</h1>
   </li>
 
   <li class="side-footer">

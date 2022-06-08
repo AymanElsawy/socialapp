@@ -1,3 +1,4 @@
+import { AuthtabsGuard } from './guard/authtabs.guard';
 import { AuthGuard } from './guard/auth.guard';
 import { AuthTabsComponent } from './components/auth-tabs/auth-tabs.component';
 import { NgModule } from '@angular/core';
@@ -6,7 +7,8 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./components/auth-tabs/auth.module').then(m => m.AuthModule)
+    loadChildren: () => import('./components/auth-tabs/auth.module').then(m => m.AuthModule),
+    canActivate: [AuthtabsGuard]
   },
   {
     path: 'streams',
