@@ -2,6 +2,7 @@ const Joi = require("joi");
 const Http = require("http-status-codes");
 const PostModel = require("../models/postModel");
 const UserModel = require("../models/userModel");
+const moment = require("moment");
 module.exports = {
   addPost(req, res) {
     const schema = Joi.object({
@@ -43,13 +44,21 @@ module.exports = {
 
   getAllPosts(req, res) {
     try {
+      const currentDate = moment().startOf('day'); // start of the day
+      const endDate = moment(currentDate).subtract(1, "day"); // 2 days ago
       PostModel.find()
         .sort({ createdAt: -1 }) // sort the posts in descending order by createdAt
         .populate("user") // populate the user field with the user's data
-        .then((posts) => {
+        .then(async (posts) => {
+          const topPosts = await PostModel.find({
+            totalLikes: { $gte: 2 }, // find posts with at least 2 likes
+            createdAt: { $gte: endDate.toDate() }, // find posts created 2 days ago
+          })
+            .populate("user")
+            .sort({ createdAt: -1, totalLikes: -1 });
           return res
             .status(Http.StatusCodes.OK)
-            .json({ message: "All Posts", posts }); // 200 and the posts
+            .json({ message: "All Posts", posts, topPosts }); // 200 and the posts
         });
     } catch (err) {
       return res
@@ -85,7 +94,7 @@ module.exports = {
         return res
           .status(Http.StatusCodes.INTERNAL_SERVER_ERROR)
           .json({ message: err.message }); // 500
-      });  
+      });
   }, // end of addLike
 
   addComment(req, res) {
@@ -131,5 +140,5 @@ module.exports = {
           .status(Http.StatusCodes.INTERNAL_SERVER_ERROR)
           .json({ message: err.message }); // 500
       });
-  }
+  },
 };

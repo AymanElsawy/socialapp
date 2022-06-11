@@ -26,18 +26,23 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'following',
+    path: 'people/following',
     loadChildren: () => import('./components/following/following.module').then(m => m.FollowingModule),
     canActivate: [AuthGuard]
   },
   {
-    path: 'followers',
+    path: 'people/followers',
     loadChildren: () => import('./components/followers/followers.module').then(m => m.FollowersModule),
     canActivate: [AuthGuard]
   },
   {
     path: 'notifications',
     loadChildren: () => import('./components/notifications/notifications.module').then(m => m.NotificationsModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'chat/:id',
+    loadChildren: () => import('./components/chat/chat.module').then(m => m.ChatModule),
     canActivate: [AuthGuard]
   },
 ];

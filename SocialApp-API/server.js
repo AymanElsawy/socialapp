@@ -45,6 +45,8 @@ const userRoute = require("./routes/userRoute"); // user route
 app.use("/api", userRoute);
 const friendRoute = require("./routes/friendRoute"); // friend route
 app.use("/api", friendRoute); 
+const messageRoute = require("./routes/messageRoute"); // message route
+app.use("/api", messageRoute); 
 
 httpServer.listen(3000, () => {
   console.log("server connected");

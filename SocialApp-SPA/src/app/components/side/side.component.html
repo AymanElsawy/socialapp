@@ -1,54 +1,82 @@
 <ul class="collection with-header">
-    <li class="collection-header">
-        <div class="row">
-            <div class="col s3 waves-effect">
-                <a>
-                    <span>Posts</span>
-                    <span class="count">15</span>
-                </a>
-            </div>
-            <div class="col s5 waves-effect">
-                <a>
-                    <span>Following</span>
-                    <span class="count">10</span>
-                </a>
-            </div>
-            <div class="col s4 waves-effect">
-                <a>
-                    <span>Followers</span>
-                    <span class="count">30</span>
-                </a>
-            </div>
-        </div>
-    </li>
-    <li class="collection-item" routerLinkActive="active">
-       <a routerLink="/streams" >
-            <div>Streams<a class="secondary-content"><i class="material-icons">announcement</i></a></div>
-       </a>
-    </li>
-    <li class="collection-item" routerLinkActive="active">
-        <a routerLink="/people" >
-            <div>People<a class="secondary-content"><i class="material-icons">people</i></a></div>
+  <li class="collection-header">
+    <div class="row">
+      <div class="col s3 ">
+        <a  routerLink="">
+          <span>Posts</span>
+          <span class="count">{{ currentUserPosts?.length }}</span>
         </a>
-    </li>
-    <li class="collection-item" routerLinkActive="active">
-       <a routerLink="/following" >
-            <div>Following<a class="secondary-content"><i class="material-icons">person_outline</i></a></div>
-       </a>
-    </li>
-    <li class="collection-item" routerLinkActive="active">
-      <a routerLink="/followers" >
-            <div>Followers<a class="secondary-content"><i class="material-icons">person</i></a></div>
-      </a>
-    </li>
-    <li class="collection-item " routerLinkActive="active" routerLinkActiveOptions="{exact:true}">
-       <a routerLink="/photos" >
-            <div>Photos<a class="secondary-content"><i class="material-icons">photo_library</i></a></div>
-       </a>
-    </li>
-    <li class="collection-item" routerLinkActive="active">
-      <a routerLink="/notifications" >
-            <div>Notifications<a class="secondary-content"><i class="material-icons">notifications</i></a></div>
-      </a>
-    </li>
+      </div>
+      <div class="col s5 ">
+        <a [routerLink]="['/people','following']">
+          <span>Following</span>
+          <span class="count">{{ currentUserFollowing?.length }}</span>
+        </a>
+      </div>
+      <div class="col s4 ">
+        <a [routerLink]="['/people','followers']">
+          <span>Followers</span>
+          <span class="count">{{ currentUserFollowers?.length }}</span>
+        </a>
+      </div>
+    </div>
+  </li>
+  <li class="collection-item" routerLinkActive="active">
+    <a routerLink="/streams">
+      <div>
+        Streams<a class="secondary-content"
+          ><i class="material-icons">announcement</i></a
+        >
+      </div>
+    </a>
+  </li>
+  <li class="collection-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+    <a routerLink="/people">
+      <div>
+        People<a class="secondary-content"
+          ><i class="material-icons">people</i></a
+        >
+      </div>
+    </a>
+  </li>
+  <li class="collection-item" routerLinkActive="active" >
+    <a [routerLink]="['/people','following']">
+      <div>
+        Following<a class="secondary-content"
+          ><i class="material-icons">person_outline</i></a
+        >
+      </div>
+    </a>
+  </li>
+  <li class="collection-item" routerLinkActive="active">
+    <a [routerLink]="['/people','followers']">
+      <div>
+        Followers<a class="secondary-content"
+          ><i class="material-icons">person</i></a
+        >
+      </div>
+    </a>
+  </li>
+  <li
+    class="collection-item"
+    routerLinkActive="active"
+    routerLinkActiveOptions="{exact:true}"
+  >
+    <a routerLink="/photos">
+      <div>
+        Photos<a class="secondary-content"
+          ><i class="material-icons">photo_library</i></a
+        >
+      </div>
+    </a>
+  </li>
+  <li class="collection-item" routerLinkActive="active">
+    <a routerLink="/notifications">
+      <div>
+        Notifications<a class="secondary-content"
+          ><i class="material-icons">notifications</i></a
+        >
+      </div>
+    </a>
+  </li>
 </ul>

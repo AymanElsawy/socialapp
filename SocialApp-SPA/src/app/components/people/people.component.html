@@ -21,7 +21,7 @@
                                
                                     <a class="btn waves-effect btn-small" *ngIf="!isFollowed(user._id)" (click)="followUser(user)">Follow</a>
                                     <a class="btn waves-effect btn-small" *ngIf="isFollowed(user._id)" (click)="unfollowUser(user)">unFollow</a>
-                                    <a><i class="material-icons right chat-icon">message</i></a>
+                                    <a [routerLink]="['/chat',user._id]"><i class="material-icons right chat-icon">message</i></a>
                                  </div>
                         </div>
                     </div>

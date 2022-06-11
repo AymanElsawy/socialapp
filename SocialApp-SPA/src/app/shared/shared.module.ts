@@ -1,3 +1,9 @@
+import { MessageService } from './../services/message.service';
+import { UserService } from './../services/user.service';
+import { PostService } from './../services/post.service';
+import { TokenService } from './../services/token.service';
+import { PostsComponent } from './../components/posts/posts.component';
+import { PostComponent } from './../components/post/post.component';
 import { RouterModule } from '@angular/router';
 import { SideComponent } from './../components/side/side.component';
 import { NavbarComponent } from './../components/navbar/navbar.component';
@@ -5,6 +11,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { TopStreamsComponent } from '../components/top-streams/top-streams.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from '../services/token-interceptor';
 
 
 
@@ -12,7 +21,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
   declarations: [
     NavbarComponent,
     SideComponent,
-    
+    TopStreamsComponent,
+    PostComponent,
+    PostsComponent
+
 
   ],
   imports: [
@@ -21,13 +33,22 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ReactiveFormsModule,
     RouterModule,
     NgxPaginationModule
-  
+
   ], exports: [
     NavbarComponent,
     SideComponent,
     FormsModule,
     ReactiveFormsModule,
-    NgxPaginationModule
-  ]
+    NgxPaginationModule,
+    PostComponent,
+    PostsComponent,
+    TopStreamsComponent
+  ],
+  providers: [
+    TokenService,
+    PostService,
+    UserService,
+    MessageService,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
 })
 export class SharedModule { }
