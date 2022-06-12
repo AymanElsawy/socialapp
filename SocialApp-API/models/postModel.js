@@ -9,8 +9,8 @@ const postSchema = mongoose.Schema({
       userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
       username: { type: String, default: "" }, // username of the user who commented on the post
       comment: { type: String, default: "" }, // the comment
-      createdAt: { type: Date, default: Date.now() },
-    }, 
+      createdAt: { type: Date, default: Date.now },
+    },
   ], // comments on the post
   totalLikes: { type: Number, default: 0 },
   likes: [
@@ -18,7 +18,7 @@ const postSchema = mongoose.Schema({
       username: { type: String, default: "" }, // username of the user who liked the post
     },
   ], // users who liked the post
-  createdAt: { type: Date, default: Date.now() },
+  createdAt: { type: Date, default: Date.now },
 });
 
 module.exports = mongoose.model("Post", postSchema);

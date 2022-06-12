@@ -17,4 +17,8 @@ export class MessageService {
         message
       }); // send message to server
   }
+
+  getAllMessages(senderId, receiverId) {
+    return this.http.get(`${environment.api}/chat/${senderId}/${receiverId}`);
+  }
 }

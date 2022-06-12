@@ -29,7 +29,7 @@
 }
 
 .isOnline {
-  color: #F1D302;
+  color: #f1d302;
   margin-top: -5px !important;
   font-size: 15px;
 }
@@ -47,7 +47,7 @@
 
 .larg-icon:hover {
   font-size: 4vw !important;
-  color: #F1D302;
+  color: #f1d302;
 }
 
 .call_cam span {
@@ -61,7 +61,7 @@
 
 .panel-content {
   background: #ebebeb !important;
-  height: 61vh !important;
+  height: 58vh !important;
   max-height: 61vh !important;
   overflow-y: scroll !important;
   margin-top: -20px !important;
@@ -92,17 +92,20 @@ textarea,
 }
 
 .chat-bubble.left {
-  background: #C1292E;
+  background: #c1292e;
   float: left;
   margin-left: 2px;
 }
 
 .chat-bubble.right {
-  background: #F1D302;
+  background: #f1d302;
   color: #fff;
   float: right;
   margin-right: 4px;
   right: 12px;
+}
+.left {
+  margin-bottom: 7px;
 }
 
 .left .msg_time_send {
@@ -123,11 +126,11 @@ textarea,
   position: relative;
   top: 20px;
   width: 35px;
-
 }
 
 .right {
   position: relative;
+  margin-bottom: 7px;
 }
 
 .right .msg_time_send {
@@ -136,7 +139,7 @@ textarea,
   font-size: 14px;
   font-weight: 600;
   top: 56px;
-  right: 104px;
+  right: 38px;
 }
 
 .receiver-read {
@@ -162,7 +165,7 @@ textarea,
   font-size: 35px !important;
   background: inherit !important;
   border: none !important;
-  opacity: .8;
+  opacity: 0.8;
   cursor: pointer;
   position: absolute;
   top: 0;
@@ -186,8 +189,6 @@ textarea,
   background-color: #235789;
 }
 
-
-
 @media only screen and (max-width: 800px) {
   .larg-icon {
     font-size: 7vw !important;
@@ -197,6 +198,6 @@ textarea,
 
   .larg-icon:hover {
     font-size: 8vw !important;
-    color: #F1D302;
+    color: #f1d302;
   }
 }

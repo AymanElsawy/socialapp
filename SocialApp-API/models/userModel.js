@@ -17,8 +17,8 @@ const userScheam = mongoose.Schema({
   posts: [
     {
       postId: { type: mongoose.Schema.Types.ObjectId, ref: "Post" }, // post id
-      post: { type: String },   // post
-      createdAt: { type: Date, default: Date.now() }, // created at
+      post: { type: String }, // post
+      createdAt: { type: Date, default: Date.now }, // created at
     },
   ], // array of posts
   notifications: [
@@ -26,17 +26,17 @@ const userScheam = mongoose.Schema({
       senderId: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, // sender id
       action: { type: String }, // action
       viewProfile: { type: Boolean, default: false }, // view profile
-      createdAt: { type: Date, default: Date.now() }, // created at
+      createdAt: { type: Date, default: Date.now }, // created at
       read: { type: Boolean, default: false }, // read
-      date:{type:String,default:''}
-    }
+      date: { type: String, default: "" },
+    },
   ],
   chatList: [
     {
       receiverId: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, // receiver id
-      messageId:{type:mongoose.Schema.Types.ObjectId,ref:'Message'},//message id
-    }
-  ]
+      messageId: { type: mongoose.Schema.Types.ObjectId, ref: "Message" }, //message id
+    },
+  ],
 });
 
 module.exports = mongoose.model("User", userScheam); // UserModel

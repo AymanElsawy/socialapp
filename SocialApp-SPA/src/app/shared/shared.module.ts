@@ -14,6 +14,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { TopStreamsComponent } from '../components/top-streams/top-streams.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from '../services/token-interceptor';
+import { NgxAutoScrollModule } from "ngx-auto-scroll";
 
 
 
@@ -32,6 +33,7 @@ import { TokenInterceptor } from '../services/token-interceptor';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    NgxAutoScrollModule,
     NgxPaginationModule
 
   ], exports: [
@@ -42,7 +44,8 @@ import { TokenInterceptor } from '../services/token-interceptor';
     NgxPaginationModule,
     PostComponent,
     PostsComponent,
-    TopStreamsComponent
+    TopStreamsComponent,
+    NgxAutoScrollModule
   ],
   providers: [
     TokenService,

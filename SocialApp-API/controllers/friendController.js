@@ -26,7 +26,7 @@ module.exports = {
           notifications: {
             senderId: req.user._id, // sender id
             action: `${req.user.username} is following you now`, // action
-            createdAt: Date.now(), // created at
+            createdAt: Date.now, // created at
           },
         },
       }
@@ -70,7 +70,8 @@ module.exports = {
   }, // unfollow user
 
   async markAsRead(req, res) {
-    if (!req.body.deleteIt) { // if delete it is true
+    if (!req.body.deleteIt) {
+      // if delete it is true
       await UserModel.updateOne(
         {
           _id: req.user._id, // user id
@@ -92,56 +93,56 @@ module.exports = {
             .status(Http.StatusCodes.INTERNAL_SERVER_ERROR)
             .json({ message: "Error marking notification as read" }); // return error message 500
         });
-    } else { // if delete it is false
-       await UserModel.updateOne(
-         {
-           _id: req.user._id, // user id
-           "notifications._id": req.params.id, // notification id
-         },
-         {
-           $pull: {
-             notifications: {_id: req.params.id}, // remove notification
-           },
-         }
-       )
-         .then((result) => {
-           return res
-             .status(Http.StatusCodes.OK)
-             .json({ message: "Notification deleted" }); // return success message 200
-         })
-         .catch((err) => {
-           return res
-             .status(Http.StatusCodes.INTERNAL_SERVER_ERROR)
-             .json({ message: "Error deleteing notification" }); // return error message 500
-         });
+    } else {
+      // if delete it is false
+      await UserModel.updateOne(
+        {
+          _id: req.user._id, // user id
+          "notifications._id": req.params.id, // notification id
+        },
+        {
+          $pull: {
+            notifications: { _id: req.params.id }, // remove notification
+          },
+        }
+      )
+        .then((result) => {
+          return res
+            .status(Http.StatusCodes.OK)
+            .json({ message: "Notification deleted" }); // return success message 200
+        })
+        .catch((err) => {
+          return res
+            .status(Http.StatusCodes.INTERNAL_SERVER_ERROR)
+            .json({ message: "Error deleteing notification" }); // return error message 500
+        });
     }
   }, // mark as read
 
   async markAllAsRead(req, res) {
-     await UserModel.updateOne(
-       {
-         _id: req.user._id, // user id
-       },
-       {
-         $set: {
-           "notifications.$[elem].read": true, // mark all as read
-         },
-       },
-       {
-         arrayFilters: [{ 'elem.read': false }], // only mark as read if not already read
-         multi:true // multi update
-         
-       }
-     )
-       .then((result) => {
-         return res
-           .status(Http.StatusCodes.OK)
-           .json({ message: "Notification marked All as read" }); // return success message 200
-       })
-       .catch((err) => {
-         return res
-           .status(Http.StatusCodes.INTERNAL_SERVER_ERROR)
-           .json({ message: "Error marking notification as read" }); // return error message 500
-       });
-  }
+    await UserModel.updateOne(
+      {
+        _id: req.user._id, // user id
+      },
+      {
+        $set: {
+          "notifications.$[elem].read": true, // mark all as read
+        },
+      },
+      {
+        arrayFilters: [{ "elem.read": false }], // only mark as read if not already read
+        multi: true, // multi update
+      }
+    )
+      .then((result) => {
+        return res
+          .status(Http.StatusCodes.OK)
+          .json({ message: "Notification marked All as read" }); // return success message 200
+      })
+      .catch((err) => {
+        return res
+          .status(Http.StatusCodes.INTERNAL_SERVER_ERROR)
+          .json({ message: "Error marking notification as read" }); // return error message 500
+      });
+  },
 };

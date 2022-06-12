@@ -13,7 +13,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   currentUser;
   notifications = [];
-  unreadNotifications =[];
+  unreadNotifications = [];
   socket;
   constructor(
     private tokenService: TokenService,
@@ -22,10 +22,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private userService: UserService
   ) {
     this.socket = io('http://localhost:3000'); // connect to socket.io server
-   }
+  }
 
   ngOnInit(): void {
-    this.init(); 
+    this.init();
     this.currentUser = this.tokenService.getPayload(); // get current user
     this.getUser(); // get user
     this.socket.on('refreshPage', () => {   // listen for event from socket.io server
@@ -33,8 +33,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
     }) //end of listen for event from socket.io server
   } // end of ngOnInit
   logOut() {
-    this.tokenService.removeToken(); // remove token
-    this.router.navigate(['']); // navigate to home page
+    if (this.tokenService.getToken()) { // if token is not empty
+      this.tokenService.removeToken(); // remove token
+      this.router.navigate(['']); // navigate to home page
+    }
+
   } // log out
 
   init() {
@@ -45,7 +48,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       outDuration: 200, // set out duration to 200
       draggable: true, // set draggable to true
 
-    }); 
+    });
     const dropdown = document.querySelectorAll('.dropdown-trigger'); // get all dropdown
     const dropdonwElement = M.Dropdown.init(dropdown, {
       alignment: 'right', // set alignment to right
