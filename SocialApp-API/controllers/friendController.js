@@ -26,7 +26,7 @@ module.exports = {
           notifications: {
             senderId: req.user._id, // sender id
             action: `${req.user.username} is following you now`, // action
-            createdAt: Date.now, // created at
+            createdAt: Date.now(), // created at
           },
         },
       }

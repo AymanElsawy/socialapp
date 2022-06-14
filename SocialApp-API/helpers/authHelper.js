@@ -20,7 +20,7 @@ module.exports = {
     }
     Jwt.verify(token, config.secretForToken, (err, decoded) => {
       if (err) {
-        if (err.expiredAt < Date.now) {
+        if (err.expiredAt < Date.now()) {
           return res
             .status(Http.StatusCodes.UNAUTHORIZED)
             .json({ message: "token expired", token: null }); // 401 and unauthorized request

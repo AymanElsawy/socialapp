@@ -7,6 +7,8 @@ module.exports = {
       .populate("posts.postId") // populate the posts with the postId
       .populate("followers.follower") // populate the followers with the follower
       .populate("following.userfollowed") // populate the following with the userfollowed
+      .populate("chatList.receiverId") // populate the chatList with the receiverId
+      .populate("chatList.messageId") // populate the chatList with the messageId
       .then((users) => {
         return res
           .status(Http.StatusCodes.OK) // 200
@@ -24,6 +26,8 @@ module.exports = {
       .populate("posts.postId") // populate the posts with the postId
       .populate("followers.follower") // populate the followers with the follower
       .populate("following.userfollowed") // populate the following with the userfollowed
+      .populate("chatList.receiverId") // populate the chatList with the receiverId
+      .populate("chatList.messageId") // populate the chatList with the messageId
       .then((user) => {
         return res
           .status(Http.StatusCodes.OK) // 200

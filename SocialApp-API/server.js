@@ -16,12 +16,15 @@ const io = new Server(httpServer, {
 });
 
 require("./socket/stream")(io); 
+require("./socket/privateChat")(io); 
+
+
 
 
 app.use(cors({
   methods:['GET','POST']
 }));
-app.options("*", cors());
+app.options("*", cors()); 
 
 app.use(express.json());
 app.use(express.urlencoded());

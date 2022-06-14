@@ -4,6 +4,7 @@ import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import * as moment from 'moment'
 import io from "socket.io-client";
 import { UserService } from 'src/app/services/user.service';
+import _ from 'lodash';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -15,6 +16,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   notifications = [];
   unreadNotifications = [];
   socket;
+  chatList = [];
+  messages = [];
   constructor(
     private tokenService: TokenService,
     private router: Router,
@@ -64,12 +67,29 @@ export class NavbarComponent implements OnInit, OnDestroy {
       this.unreadNotifications = this.notifications.filter(
         notification => notification.read === false
       ); // get unread notifications
+      this.chatList = data['user'].chatList; // get chat list
+      this.chatList.forEach(element => {   // for each element in chat list
+        let msgs = element['messageId']['messages']; // get messages
+        this.messages.push(
+          msgs.filter((message) => message.isRead === false && message.receiverId === this.currentUser._id) // get unread messages
+        ); // get last message
+      })
     });
   } // get user
 
   timeAgo(time) {
     return moment(time).fromNow(); // get time from now
   } // get time from now
+
+  calenderDate(date) {
+    return moment(date).calendar(null, {
+      sameDay: '[Today]',
+      lastDay: '[Yesterday]',
+      lastWeek: '[Last Week]',
+      sameElse: 'DD/MM/YYYY'
+    }); // get calendar date
+  } // get calendar date
+  
 
 
   markAllAsRead() {

@@ -61,7 +61,7 @@
 
 .panel-content {
   background: #ebebeb !important;
-  height: 58vh !important;
+  height: 60.2vh !important;
   max-height: 61vh !important;
   overflow-y: scroll !important;
   margin-top: -20px !important;
@@ -92,18 +92,19 @@ textarea,
 }
 
 .chat-bubble.left {
-  background: #c1292e;
+  background: #f1d302;
   float: left;
   margin-left: 2px;
 }
 
 .chat-bubble.right {
-  background: #f1d302;
+  background: #235789;
   color: #fff;
   float: right;
   margin-right: 4px;
   right: 12px;
 }
+
 .left {
   margin-bottom: 7px;
 }
@@ -126,6 +127,7 @@ textarea,
   position: relative;
   top: 20px;
   width: 35px;
+
 }
 
 .right {
@@ -165,11 +167,11 @@ textarea,
   font-size: 35px !important;
   background: inherit !important;
   border: none !important;
-  opacity: 0.8;
+  opacity: .8;
   cursor: pointer;
   position: absolute;
   top: 0;
-  right: 6.8rem;
+  right: 7.5vw;
 }
 
 .emoji:hover {
@@ -189,15 +191,62 @@ textarea,
   background-color: #235789;
 }
 
-@media only screen and (max-width: 800px) {
+
+
+@media only screen and (max-width: 597px) {
   .larg-icon {
-    font-size: 7vw !important;
+    font-size: 8vw !important;
     margin-right: 2vw;
     cursor: pointer;
   }
 
   .larg-icon:hover {
-    font-size: 8vw !important;
+    font-size: 8.5vw !important;
     color: #f1d302;
   }
+
+  .emoji {
+    right: 19vw;
+  }
+
+  .receiver-name span {
+    font-size: 16px;
+    font-weight: 600 !important;
+    color: white !important;
+  }
 }
+
+@media only screen and (min-width: 600px) {
+  .larg-icon {
+    font-size: 5vw !important;
+    margin-right: 2vw;
+    cursor: pointer;
+  }
+
+  .larg-icon:hover {
+    font-size: 5.5vw !important;
+    color: #f1d302;
+  }
+
+  .emoji {
+    right: 14vw;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .larg-icon {
+    font-size: 4vw !important;
+    margin-right: 2vw;
+    cursor: pointer;
+  }
+
+  .larg-icon:hover {
+    font-size: 4.5vw !important;
+    color: #f1d302;
+  }
+
+  .emoji {
+    right: 7.5vw;
+  }
+}
+

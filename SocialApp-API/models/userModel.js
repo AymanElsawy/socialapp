@@ -18,7 +18,7 @@ const userScheam = mongoose.Schema({
     {
       postId: { type: mongoose.Schema.Types.ObjectId, ref: "Post" }, // post id
       post: { type: String }, // post
-      createdAt: { type: Date, default: Date.now }, // created at
+      createdAt: { type: Date, default: Date.now() }, // created at
     },
   ], // array of posts
   notifications: [
@@ -26,7 +26,7 @@ const userScheam = mongoose.Schema({
       senderId: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, // sender id
       action: { type: String }, // action
       viewProfile: { type: Boolean, default: false }, // view profile
-      createdAt: { type: Date, default: Date.now }, // created at
+      createdAt: { type: Date, default: Date.now() }, // created at
       read: { type: Boolean, default: false }, // read
       date: { type: String, default: "" },
     },

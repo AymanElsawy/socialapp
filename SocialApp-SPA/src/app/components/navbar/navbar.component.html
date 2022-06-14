@@ -4,12 +4,49 @@
       <a routerLink="/streams" class="brand-logo"
         ><img src="assets/images/logo.png"
       /></a>
-      <a routerLink="/streams" data-target="mobile" class="sidenav-trigger"
+      <a  data-target="mobile" class="sidenav-trigger"
         ><i class="material-icons">menu</i></a
       >
-      <ul class="right hide-on-med-and-down">
+      <ul class="right">
         <!-- Dropdown Trigger -->
-        <li class="dropdown-trigger" data-target="dropdown">
+         <li class='dropdown-trigger dt2' data-target='dropdown2' [hidden]="messages[0]?.length==0">
+          <div class="notification">
+            <i class="material-icons">mail</i>
+            <span class="badge" *ngIf="unreadNotifications.length>0">{{unreadNotifications.length}}</span>
+          </div>
+          <!-- Dropdown2 Structure -->
+          <ul id='dropdown2' class='dropdown-content col s12 collection'>
+            <li class="collection-item avatar" *ngFor="let message of messages">
+              <img class="circle" src="http://placeimg.com/200/200/nature">
+              <span class="title">
+                {{message[message.length-1].senderName}}
+                <p class="secondary-content">
+                  {{calenderDate(message[message.length-1].createdAt)}}
+                </p>
+              </span>
+
+              <div class="time">
+                {{message[message.length-1].body | slice:0:20}}
+                <div class="secondary-content">
+                  <p *ngIf="message[message.length-1].isRead">
+                    <i class="material-icons icon">radio_button_checked</i>
+                  </p>
+                  <p *ngIf="!message[message.length-1].isRead">
+                    <i class="material-icons icon" >radio_button_unchecked</i>
+                  </p>
+                </div>
+              </div>
+            </li>
+            <li class="collection-item" *ngIf="messages[0]?.length==0">
+              <p class="center">No Messages</p>
+            </li>
+            <li *ngIf="messages[0]?.length!==0">
+              <button class="waves-effect btn mark-all" (click)="markAllAsRead()">Mark All As Read
+              </button>
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown-trigger dt1" data-target="dropdown">
           <div class="notification">
             <i class="material-icons">notifications</i>
             <span class="badge" *ngIf="unreadNotifications.length != 0">{{
@@ -46,7 +83,7 @@
           </ul>
         </li>
 
-        <li>
+        <li class="hide-on-med-and-down">
           <a class="logout waves-effect" (click)="logOut()"
             ><i class="material-icons left">power_settings_new</i> LOGOUT</a
           >
