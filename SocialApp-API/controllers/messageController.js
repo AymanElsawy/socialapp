@@ -2,6 +2,8 @@ const Http = require("http-status-codes");
 const Conversation = require("../models/conversationModel");
 const Message = require("../models/messageModel");
 const User = require("../models/userModel");
+const Helper = require('../helpers/helper');
+const mongoose = require('mongoose');
 module.exports = {
   sendMessages(req, res) {
     console.log(req.body);
@@ -31,6 +33,11 @@ module.exports = {
       async (err, result) => {
         if (result.length > 0) {
           // if conversation found
+          const msg = await Message.findOne({
+            // find message with conversation id
+            conversationId: result[0]._id,
+          });
+          Helper.updateChatList(req, msg); // update chat list
           await Message.updateOne(
             {
               conversationId: result[0]._id, // get conversation id
@@ -162,6 +169,41 @@ module.exports = {
       res
         .status(Http.StatusCodes.OK)
         .json({ message: "message returned", message }); // send response ok
+    }
+  },
+  async markReceiverMessages(req, res) {
+    const { senderId, receiverId } = req.params;
+    const msgs = await Message.aggregate([
+      { $unwind: "$messages" },
+      {
+        $match: {
+          $and: [
+            {
+              "messages.senderId": new mongoose.Types.ObjectId(senderId),
+            },
+            {
+              "messages.receiverId": new mongoose.Types.ObjectId(receiverId),
+            },
+          ],
+        },
+      },
+    ]);
+    if (msgs.length > 0) {
+      try {
+        msgs.forEach(async (element) => {
+          await Message.updateOne(
+            {
+              "messages._id": element.messages._id,
+            },
+            { $set: { "messages.$.isRead": true } } //  $ first index match the query condition
+          );
+        });
+        res.status(Http.StatusCodes.OK).json({ message: "Messages marked as read" });
+      } catch (err) {
+        res
+          .status(Http.StatusCodes.INTERNAL_SERVER_ERROR)
+          .json({ message: "Error occured" });
+      }
     }
   },
 };

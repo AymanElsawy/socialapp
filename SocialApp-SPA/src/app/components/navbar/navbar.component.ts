@@ -1,3 +1,4 @@
+import { MessageService } from './../../services/message.service';
 import { Router } from '@angular/router';
 import { TokenService } from 'src/app/services/token.service';
 import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
@@ -18,11 +19,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
   socket;
   chatList = [];
   messages = [];
+  count = 0;
   constructor(
     private tokenService: TokenService,
     private router: Router,
     private renderer: Renderer2,
-    private userService: UserService
+    private userService: UserService,
+    private messageService: MessageService
   ) {
     this.socket = io('http://localhost:3000'); // connect to socket.io server
   }
@@ -62,18 +65,38 @@ export class NavbarComponent implements OnInit, OnDestroy {
   } // end of init
 
   getUser() {
+    if (this.router.url.includes('/chat')) { 
+      setTimeout(() => { 
+        this.getUser(); 
+       },2000) 
+    } // if url includes chat
     this.userService.getUser(this.currentUser._id).subscribe(data => {
+      this.messages = [];
       this.notifications = data['user'].notifications.reverse(); // get current user notifications
       this.unreadNotifications = this.notifications.filter(
         notification => notification.read === false
       ); // get unread notifications
       this.chatList = data['user'].chatList; // get chat list
-      this.chatList.forEach(element => {   // for each element in chat list
+      
+      this.chatList.forEach(element => {
+        if (this.router.url === `/chat/${element.receiverId._id}`) {
+          this.messageService.markMessages(element.receiverId._id, this.currentUser._id).subscribe(
+            data => {
+            }
+          );
+        }   // for each element in chat list
         let msgs = element['messageId']['messages']; // get messages
         this.messages.push(
           msgs.filter((message) => message.isRead === false && message.receiverId === this.currentUser._id) // get unread messages
-        ); // get last message
+        );
+        this.count = this.messages.length;
+        _.forEach(this.messages, (message) => {
+          if (_.isEmpty(message)) {
+            this.count--
+          }
+        }); // get last message
       })
+      console.log(this.messages);
     });
   } // get user
 
@@ -98,6 +121,16 @@ export class NavbarComponent implements OnInit, OnDestroy {
     }
     );
   } // mark all notifications as read
+
+  openMessage(senderId) {
+    this.router.navigate(['/chat', senderId]); // navigate to message page
+    this.messageService.markMessages(senderId, this.currentUser._id).subscribe(data => { // mark messages as read
+      console.log(data);
+      this.socket.emit('refresh', {}); // emit event to socket.io server
+    });
+  }
+
+
 
   ngOnDestroy(): void {
     let over = document.getElementsByClassName('sidenav-overlay'); // get all sidenav-overlay

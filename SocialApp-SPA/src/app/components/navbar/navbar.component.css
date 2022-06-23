@@ -106,6 +106,10 @@ nav {
     0 0 3px #ffffff;
 }
 
+.message-count{
+  left:-10px !important;
+}
+
 .dropdown-content {
   top: 45px !important;
   min-width: 340px;

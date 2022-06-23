@@ -21,4 +21,8 @@ export class MessageService {
   getAllMessages(senderId, receiverId) {
     return this.http.get(`${environment.api}/chat/${senderId}/${receiverId}`);
   }
+
+  markMessages(senderId, receiverId) {
+    return this.http.get(`${environment.api}/receiver-messages/${senderId}/${receiverId}`);
+  }
 }

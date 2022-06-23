@@ -4,44 +4,61 @@
       <a routerLink="/streams" class="brand-logo"
         ><img src="assets/images/logo.png"
       /></a>
-      <a  data-target="mobile" class="sidenav-trigger"
+      <a data-target="mobile" class="sidenav-trigger"
         ><i class="material-icons">menu</i></a
       >
       <ul class="right">
         <!-- Dropdown Trigger -->
-         <li class='dropdown-trigger dt2' data-target='dropdown2' [hidden]="messages[0]?.length==0">
+        <li
+          class="dropdown-trigger dt2"
+          data-target="dropdown2"
+          
+        >
           <div class="notification">
             <i class="material-icons">mail</i>
-            <span class="badge" *ngIf="unreadNotifications.length>0">{{unreadNotifications.length}}</span>
+            <span
+              class="badge message-count"
+              *ngIf="count !== 0"
+              >{{ count }}</span
+            >
           </div>
           <!-- Dropdown2 Structure -->
-          <ul id='dropdown2' class='dropdown-content col s12 collection'>
-            <li class="collection-item avatar" *ngFor="let message of messages">
-              <img class="circle" src="http://placeimg.com/200/200/nature">
+          <ul id="dropdown2" class="dropdown-content col s12 collection">
+            <li
+              class="collection-item avatar"
+              *ngFor="let message of messages"
+               [hidden]="message.length === 0"
+              (click)="openMessage(message[message.length - 1]?.senderId)"
+            >
+              <img class="circle" src="http://placeimg.com/200/200/nature" />
               <span class="title">
-                {{message[message.length-1].senderName}}
+                {{ message[message.length - 1]?.senderName }}
                 <p class="secondary-content">
-                  {{calenderDate(message[message.length-1].createdAt)}}
+                  {{ calenderDate(message[message.length - 1]?.createdAt) }}
                 </p>
               </span>
 
               <div class="time">
-                {{message[message.length-1].body | slice:0:20}}
+                {{ message[message.length - 1]?.body | slice: 0:20 }}
                 <div class="secondary-content">
-                  <p *ngIf="message[message.length-1].isRead">
+                  <p *ngIf="message[message.length - 1]?.isRead">
                     <i class="material-icons icon">radio_button_checked</i>
                   </p>
-                  <p *ngIf="!message[message.length-1].isRead">
-                    <i class="material-icons icon" >radio_button_unchecked</i>
+                  <p *ngIf="!message[message.length - 1]?.isRead">
+                    <i class="material-icons icon">radio_button_unchecked</i>
                   </p>
                 </div>
               </div>
             </li>
-            <li class="collection-item" *ngIf="messages[0]?.length==0">
+            <li class="collection-item" *ngIf="count === 0">
               <p class="center">No Messages</p>
             </li>
-            <li *ngIf="messages[0]?.length!==0">
-              <button class="waves-effect btn mark-all" (click)="markAllAsRead()">Mark All As Read
+            <li *ngIf="count !== 0">
+              <button
+                class="waves-effect btn mark-all"
+                (click)="markAllAsRead()"
+              >
+                Mark All As Read
               </button>
             </li>
           </ul>
@@ -50,7 +67,7 @@
           <div class="notification">
             <i class="material-icons">notifications</i>
             <span class="badge" *ngIf="unreadNotifications.length != 0">{{
-              unreadNotifications.length
+              unreadNotifications?.length
             }}</span>
           </div>
           <!-- Dropdown Structure -->
@@ -65,9 +82,9 @@
                 [ngStyle]="{
                   'font-weight': notification.read ? 'normal' : 'bold'
                 }"
-                >{{ notification.action }}</span
+                >{{ notification?.action }}</span
               >
-              <p class="time">{{ timeAgo(notification.createdAt) }}</p>
+              <p class="time">{{ timeAgo(notification?.createdAt) }}</p>
             </li>
             <li class="collection-item" *ngIf="notifications.length == 0">
               <p class="center">No notification</p>
@@ -95,14 +112,14 @@
       <div class="nav-div">
         <img class="circle responsive-img" src="http://placeimg.com/100/100" />
       </div>
-      <h1 class="profile-name">{{ currentUser.username }}</h1>
+      <h1 class="profile-name">{{ currentUser?.username }}</h1>
     </div>
   </div>
 </nav>
 <ul id="mobile" class="sidenav">
   <li class="side">
     <img class="circle responsive-img" src="http://placeimg.com/100/100" />
-    <h1 class="profile-name">{{ currentUser.username }}</h1>
+    <h1 class="profile-name">{{ currentUser?.username }}</h1>
   </li>
 
   <li class="side-footer">
