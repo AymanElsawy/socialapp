@@ -130,7 +130,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
     });
   }
 
+  markAllMessagesAsRead() {
+    this.messageService.markAllMessages().subscribe(data => { // mark all messages as read
+      this.count = 0;
+      this.socket.emit('refresh', {}); // emit event to socket.io server
+     })
 
+}  // mark all messages as read
 
   ngOnDestroy(): void {
     let over = document.getElementsByClassName('sidenav-overlay'); // get all sidenav-overlay

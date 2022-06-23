@@ -172,36 +172,67 @@ module.exports = {
     }
   },
   async markReceiverMessages(req, res) {
-    const { senderId, receiverId } = req.params;
-    const msgs = await Message.aggregate([
-      { $unwind: "$messages" },
+    const { senderId, receiverId } = req.params; // get sender and receiver id from params
+    const msgs = await Message.aggregate([ // get all messages between sender and receiver
+      { $unwind: "$messages" }, // unwind messages
       {
-        $match: {
+        $match: { // match messages
           $and: [
             {
-              "messages.senderId": new mongoose.Types.ObjectId(senderId),
+              "messages.senderId": new mongoose.Types.ObjectId(senderId), // if sender id is in messages
             },
             {
-              "messages.receiverId": new mongoose.Types.ObjectId(receiverId),
+              "messages.receiverId": new mongoose.Types.ObjectId(receiverId), // if receiver id is in messages
             },
-          ],
-        },
-      },
-    ]);
-    if (msgs.length > 0) {
-      try {
-        msgs.forEach(async (element) => {
-          await Message.updateOne(
+          ], 
+        }, 
+      }, 
+    ]); 
+    if (msgs.length > 0) { // if messages found
+      try { // try to update messages
+        msgs.forEach(async (element) => { // for each message
+          await Message.updateOne( // update message
             {
-              "messages._id": element.messages._id,
+              "messages._id": element.messages._id, // get message id
             },
             { $set: { "messages.$.isRead": true } } //  $ first index match the query condition
           );
         });
-        res.status(Http.StatusCodes.OK).json({ message: "Messages marked as read" });
+        res
+          .status(Http.StatusCodes.OK)
+          .json({ message: "Messages marked as read" }); // send response ok
       } catch (err) {
         res
-          .status(Http.StatusCodes.INTERNAL_SERVER_ERROR)
+          .status(Http.StatusCodes.INTERNAL_SERVER_ERROR) // send response err
+          .json({ message: "Error occured" });
+      }
+    }
+  },
+  async markAllMessages(req, res) {
+    const msgs = await Message.aggregate([ // get all messages
+      { $unwind: "$messages" }, // unwind messages
+      {
+        $match: {
+          "messages.receiverId": new mongoose.Types.ObjectId(req.user._id), // if receiver id is in messages equl current user id
+        },
+      },
+    ]);
+    if (msgs.length > 0) { // if messages found 
+      try {
+        msgs.forEach(async (element) => {   // for each message
+          await Message.updateOne( // update message
+            {
+              "messages._id": element.messages._id, // get message id
+            },
+            { $set: { "messages.$.isRead": true } } //  $ first index match the query condition
+          );
+        });
+        res
+          .status(Http.StatusCodes.OK)
+          .json({ message: "All Messages marked as read" }); // send response ok
+      } catch (err) {
+        res
+          .status(Http.StatusCodes.INTERNAL_SERVER_ERROR) // send response err
           .json({ message: "Error occured" });
       }
     }

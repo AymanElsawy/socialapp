@@ -18,6 +18,13 @@ router.get(
   "/receiver-messages/:senderId/:receiverId",
   authHelper.verfyToken,
   messageController.markReceiverMessages
-); // get all messages
+); // mark message as read
+router.get(
+  "/mark-all-messages",
+  authHelper.verfyToken,
+  messageController.markAllMessages
+); // mark All message as read
+
+
 
 module.exports = router;

@@ -19,10 +19,13 @@ export class MessageService {
   }
 
   getAllMessages(senderId, receiverId) {
-    return this.http.get(`${environment.api}/chat/${senderId}/${receiverId}`);
+    return this.http.get(`${environment.api}/chat/${senderId}/${receiverId}`); // get all messages from server
   }
 
   markMessages(senderId, receiverId) {
-    return this.http.get(`${environment.api}/receiver-messages/${senderId}/${receiverId}`);
+    return this.http.get(`${environment.api}/receiver-messages/${senderId}/${receiverId}`); // mark messages as read
+  }
+  markAllMessages() {
+    return this.http.get(`${environment.api}/mark-all-messages/`); // mark all messages as read
   }
 }
