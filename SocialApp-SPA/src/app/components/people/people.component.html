@@ -1,5 +1,5 @@
 <div class="animate__animated animate__flash">
-    <app-navbar></app-navbar>
+<app-navbar (onlineUser)="online($event)"></app-navbar>
     <div class="container-fluid" style="margin-top: 10px">
         <div class="row">
             <div class="col s12 m4 l4 xl3">
@@ -12,6 +12,7 @@
                             <a>
                                 <div class="card-image img-div">
                                     <img class="circle responsive-img" src="http://placeimg.com/200/200/nature">
+                                    <div class="online" *ngIf="checkIfOnline(user._id)"></div>
                                 </div>
                             </a>
                             <div class="card-action">

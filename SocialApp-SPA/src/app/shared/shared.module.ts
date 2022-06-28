@@ -34,7 +34,9 @@ import { NgxAutoScrollModule } from "ngx-auto-scroll";
     ReactiveFormsModule,
     RouterModule,
     NgxAutoScrollModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    
+
 
   ], exports: [
     NavbarComponent,
@@ -45,7 +47,9 @@ import { NgxAutoScrollModule } from "ngx-auto-scroll";
     PostComponent,
     PostsComponent,
     TopStreamsComponent,
-    NgxAutoScrollModule
+    NgxAutoScrollModule,
+    
+   
   ],
   providers: [
     TokenService,

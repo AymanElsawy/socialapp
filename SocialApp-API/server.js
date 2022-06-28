@@ -3,6 +3,8 @@ const config = require("./config/config");
 const cookie = require("cookie-parser");
 const express = require("express");
 const cors = require("cors");
+const _ = require('lodash');
+
 const app = express();
 const httpServer = require('http').createServer(app);
 const { Server } = require('socket.io');
@@ -15,7 +17,8 @@ const io = new Server(httpServer, {
   }
 });
 
-require("./socket/stream")(io); 
+const { User } = require("./helpers/userClass");
+require("./socket/stream")(io,User,_); 
 require("./socket/privateChat")(io); 
 
 

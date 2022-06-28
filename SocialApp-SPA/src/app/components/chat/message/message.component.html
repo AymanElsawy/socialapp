@@ -16,7 +16,8 @@
                 <span>
                   {{ receiverData?.username }}
                   <span *ngIf="typing"> is typing</span>
-                  <p class="isOnline">Online</p>
+                  <p class="isOnline" *ngIf="isOnline">online</p>
+                  <p class="isOffline" *ngIf="!isOnline">offline</p>
                 </span>
               </div>
             </div>
@@ -40,8 +41,13 @@
     </div>
   </div>
   <div class="col s12">
-    <div class="row panel-content" ngx-auto-scroll lock-y-offset="10" observe-attributes>
-      <div class="card" *ngFor="let message of messages" >
+    <div
+      class="row panel-content"
+      ngx-auto-scroll
+      lock-y-offset="10"
+      observe-attributes
+    >
+      <div class="card" *ngFor="let message of messages">
         <div
           class="left left-message col s12"
           *ngIf="
@@ -57,15 +63,14 @@
         </div>
         <div
           class="right col s12"
-          *ngIf="
-            senderData.username === message.senderName "
+          *ngIf="senderData.username === message.senderName"
         >
           <div class="chat-bubble right">
             <div class="message">{{ message.body }}</div>
           </div>
           <span class="msg_time_send">{{ timeAgo(message.createdAt) }}</span>
-          <img 
-          *ngIf="message.isRead"
+          <img
+            *ngIf="message.isRead"
             src="http://placeimg.com/50/50/nature"
             width="20"
             alt=""
@@ -77,22 +82,16 @@
   </div>
   <div class="col s12 wrapper">
     <div class="row">
-      <form
-        #messageForm="ngForm"
-        (ngSubmit)="sendMessage()"
-      >
+      <form #messageForm="ngForm" (ngSubmit)="sendMessage()">
         <div class="col s8 m9 l10">
           <textarea
-          (keypress)="isTyping()"
+            (keypress)="isTyping()"
             [(ngModel)]="message"
             required
             name="message"
             class="materialize-textarea"
             placeholder="write your message and press send"
           ></textarea>
-        </div>
-        <div class="col s1">
-          <button class="emoji">😃</button>
         </div>
         <div class="col s1">
           <button class="suffix btn" [disabled]="!messageForm.valid">

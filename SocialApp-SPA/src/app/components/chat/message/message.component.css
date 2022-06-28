@@ -34,6 +34,12 @@
   font-size: 15px;
 }
 
+.isOffline{
+  color: #d1d1d1;
+  margin-top: -5px !important;
+  font-size: 15px;
+}
+
 .call_cam {
   margin-left: 4vw;
   margin-top: 0;
@@ -163,21 +169,6 @@ textarea,
   margin-left: -11px;
 }
 
-.emoji {
-  font-size: 35px !important;
-  background: inherit !important;
-  border: none !important;
-  opacity: .8;
-  cursor: pointer;
-  position: absolute;
-  top: 0;
-  right: 7.5vw;
-}
-
-.emoji:hover {
-  opacity: 1;
-}
-
 .suffix {
   width: 85px;
   height: 44px !important;
@@ -205,9 +196,6 @@ textarea,
     color: #f1d302;
   }
 
-  .emoji {
-    right: 19vw;
-  }
 
   .receiver-name span {
     font-size: 16px;
@@ -228,9 +216,6 @@ textarea,
     color: #f1d302;
   }
 
-  .emoji {
-    right: 14vw;
-  }
 }
 
 @media only screen and (min-width: 992px) {
@@ -245,8 +230,6 @@ textarea,
     color: #f1d302;
   }
 
-  .emoji {
-    right: 7.5vw;
-  }
+
 }
 

@@ -1,7 +1,7 @@
 import { MessageService } from './../../services/message.service';
 import { Router } from '@angular/router';
 import { TokenService } from 'src/app/services/token.service';
-import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnDestroy, OnInit, Renderer2, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import * as moment from 'moment'
 import io from "socket.io-client";
 import { UserService } from 'src/app/services/user.service';
@@ -11,8 +11,9 @@ import _ from 'lodash';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit, OnDestroy {
+export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
 
+  @Output('onlineUser') onlineUser = new EventEmitter();
   currentUser;
   notifications = [];
   unreadNotifications = [];
@@ -20,6 +21,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   chatList = [];
   messages = [];
   count = 0;
+  
   constructor(
     private tokenService: TokenService,
     private router: Router,
@@ -33,13 +35,22 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.init();
     this.currentUser = this.tokenService.getPayload(); // get current user
+    this.socket.emit('online', { room: 'global', userId: this.currentUser._id }); // emit event to socket.io server
     this.getUser(); // get user
     this.socket.on('refreshPage', () => {   // listen for event from socket.io server
       this.getUser(); // get user
     }) //end of listen for event from socket.io server
   } // end of ngOnInit
+
+  ngAfterViewInit(): void {
+    this.socket.on('onlineUsers', (data) => {// listen for event from socket.io server
+      this.onlineUser.emit(data); // emit event to component
+      
+    }) // listen for event from socket.io server
+  } // end of ngAfterViewInit
   logOut() {
     if (this.tokenService.getToken()) { // if token is not empty
+      this.socket.disconnect(); // disconnect from socket.io server
       this.tokenService.removeToken(); // remove token
       this.router.navigate(['']); // navigate to home page
     }
@@ -65,10 +76,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
   } // end of init
 
   getUser() {
-    if (this.router.url.includes('/chat')) { 
-      setTimeout(() => { 
-        this.getUser(); 
-       },2000) 
+    if (this.router.url.includes('/chat')) {
+      setTimeout(() => {
+        this.getUser();
+      }, 2000)
     } // if url includes chat
     this.userService.getUser(this.currentUser._id).subscribe(data => {
       this.messages = [];
@@ -77,7 +88,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
         notification => notification.read === false
       ); // get unread notifications
       this.chatList = data['user'].chatList; // get chat list
-      
+
       this.chatList.forEach(element => {
         if (this.router.url === `/chat/${element.receiverId._id}`) {
           this.messageService.markMessages(element.receiverId._id, this.currentUser._id).subscribe(
@@ -96,7 +107,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
           }
         }); // get last message
       })
-      console.log(this.messages);
     });
   } // get user
 
@@ -112,7 +122,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       sameElse: 'DD/MM/YYYY'
     }); // get calendar date
   } // get calendar date
-  
+
 
 
   markAllAsRead() {
@@ -134,9 +144,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.messageService.markAllMessages().subscribe(data => { // mark all messages as read
       this.count = 0;
       this.socket.emit('refresh', {}); // emit event to socket.io server
-     })
+    })
 
-}  // mark all messages as read
+  }  // mark all messages as read
 
   ngOnDestroy(): void {
     let over = document.getElementsByClassName('sidenav-overlay'); // get all sidenav-overlay

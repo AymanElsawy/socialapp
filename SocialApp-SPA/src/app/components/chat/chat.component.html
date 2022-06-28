@@ -1,8 +1,8 @@
-<app-navbar></app-navbar>
+<app-navbar (onlineUser)="online($event)"></app-navbar>
 <div class="container">
     <div class="row chat">
         <div class="col s12">
-            <app-message></app-message>
+            <app-message [onlineUsers]="onlineUsers"></app-message>
         </div>
     </div>
 </div>

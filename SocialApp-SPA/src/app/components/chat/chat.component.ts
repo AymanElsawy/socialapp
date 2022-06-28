@@ -7,6 +7,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 })
 export class ChatComponent implements OnInit ,AfterViewInit{
   navContent;
+  onlineUsers=[];
   constructor() { }
 
   ngOnInit(): void {
@@ -17,5 +18,9 @@ export class ChatComponent implements OnInit ,AfterViewInit{
   ngAfterViewInit(): void {
     this.navContent.style.display = 'none'; // hide nav content
   } // hide nav content
+
+  online(event) {
+    this.onlineUsers = event; // get online users
+  }
 
 }

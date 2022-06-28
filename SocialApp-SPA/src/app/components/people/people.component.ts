@@ -12,7 +12,9 @@ export class PeopleComponent implements OnInit {
   users = []; // users array
   currentUser; // current user
   currentUserFollowing = []; 
-  socket;
+  socket; 
+  onlineUsers;
+  
 
 
   constructor(private userService: UserService, private tokenService: TokenService) { 
@@ -62,4 +64,18 @@ export class PeopleComponent implements OnInit {
       this.socket.emit('refresh', { message: 'refresh page' }); // emit event to refresh page from socket.io server
      })
   } // follow user
+
+  online(event) {
+    this.onlineUsers = event;// get online users
+  } //online users
+
+  checkIfOnline(id) {
+    const result = _.indexOf(this.onlineUsers, id); // get index of receiverId in onlineUsers
+    if (result > -1) {
+      return true; // set isOnline to true
+    } else {
+      return false; // set isOnline to false
+    }
+  } // check if online
+  
 }
