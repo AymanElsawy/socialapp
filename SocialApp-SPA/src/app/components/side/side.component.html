@@ -62,7 +62,7 @@
     routerLinkActive="active"
     routerLinkActiveOptions="{exact:true}"
   >
-    <a routerLink="/photos">
+    <a [routerLink]="['/photos', currentUser._id]">
       <div>
         Photos<a class="secondary-content"
           ><i class="material-icons">photo_library</i></a

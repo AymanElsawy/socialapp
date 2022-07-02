@@ -1,6 +1,5 @@
 import { AuthtabsGuard } from './guard/authtabs.guard';
 import { AuthGuard } from './guard/auth.guard';
-import { AuthTabsComponent } from './components/auth-tabs/auth-tabs.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -45,6 +44,15 @@ const routes: Routes = [
     loadChildren: () => import('./components/chat/chat.module').then(m => m.ChatModule),
     canActivate: [AuthGuard]
   },
+  {
+    path: 'photos/:id',
+    loadChildren: () => import('./components/photos/photos.module').then(m => m.PhotosModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: '**',
+    redirectTo: 'streams',
+  }
 ];
 
 @NgModule({

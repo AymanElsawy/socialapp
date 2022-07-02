@@ -1,3 +1,4 @@
+import { AlertifyService } from './../services/alertify.service';
 import { MessageService } from './../services/message.service';
 import { UserService } from './../services/user.service';
 import { PostService } from './../services/post.service';
@@ -56,6 +57,7 @@ import { NgxAutoScrollModule } from "ngx-auto-scroll";
     PostService,
     UserService,
     MessageService,
+    AlertifyService,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
 })
 export class SharedModule { }

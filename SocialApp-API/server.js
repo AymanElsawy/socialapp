@@ -53,6 +53,8 @@ const friendRoute = require("./routes/friendRoute"); // friend route
 app.use("/api", friendRoute); 
 const messageRoute = require("./routes/messageRoute"); // message route
 app.use("/api", messageRoute); 
+const photoRoute = require("./routes/photoRoute"); // message route
+app.use("/api", photoRoute); 
 
 httpServer.listen(3000, () => {
   console.log("server connected");
