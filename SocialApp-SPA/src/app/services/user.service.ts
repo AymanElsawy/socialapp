@@ -33,6 +33,11 @@ export class UserService {
     return this.http.post(`${environment.api}/upload-photo`, { photo: photo }); // upload photo 
   } // upload photo
 
+  setAsProfile(photoVersion,photoId) {
+    return this.http.get(`${environment.api}/set-as-profile/${photoVersion}/${photoId}`); // set as profile 
+   // set as profile
+  }
+
 }
 
 

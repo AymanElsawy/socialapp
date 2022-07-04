@@ -21,7 +21,10 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   chatList = [];
   messages = [];
   count = 0;
-  
+  photoVersion;
+  photoId;
+  photoUrl: string;
+
   constructor(
     private tokenService: TokenService,
     private router: Router,
@@ -40,12 +43,13 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     this.socket.on('refreshPage', () => {   // listen for event from socket.io server
       this.getUser(); // get user
     }) //end of listen for event from socket.io server
+
   } // end of ngOnInit
 
   ngAfterViewInit(): void {
     this.socket.on('onlineUsers', (data) => {// listen for event from socket.io server
       this.onlineUser.emit(data); // emit event to component
-      
+
     }) // listen for event from socket.io server
   } // end of ngAfterViewInit
   logOut() {
@@ -82,6 +86,9 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
       }, 2000)
     } // if url includes chat
     this.userService.getUser(this.currentUser._id).subscribe(data => {
+      this.photoVersion = data['user'].photoVersion; // get photo version
+      this.photoId = data['user'].photoId; // get photo id
+      this.photoUrl = 'https://res.cloudinary.com/des1acmba/image/upload/v' + this.photoVersion + "/" + this.photoId; // set photo url
       this.messages = [];
       this.notifications = data['user'].notifications.reverse(); // get current user notifications
       this.unreadNotifications = this.notifications.filter(

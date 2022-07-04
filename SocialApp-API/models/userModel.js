@@ -37,6 +37,14 @@ const userScheam = mongoose.Schema({
       messageId: { type: mongoose.Schema.Types.ObjectId, ref: "Message" }, //message id
     },
   ],
+  photoVersion: { type: String, default: "1656901224" }, // photo version
+  photoId: { type: String, default: "pwp2wsmgi8etfwcnpa0l.jpg" }, // photo id
+  photos: [
+    {
+      photoVersion: { type: String, default: "" }, // photo version
+      photoId: { type: String, default: "" }, // photo id
+    },
+  ], // array of photos
 });
 
 module.exports = mongoose.model("User", userScheam); // UserModel

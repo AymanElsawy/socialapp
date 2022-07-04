@@ -24,15 +24,32 @@
           </div>
           <div class="col s12">
             <img
-              class="img-upload animated fadeIn"
+              class="img-upload"
               *ngIf="url"
               src="{{ url }}"
               height="250px"
               width="250px"
             />
+            <div class="preloader-wrapper big active" *ngIf="preloader">
+              <div class="spinner-layer spinner-blue-only">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                  <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                  <div class="circle"></div>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="col s12">
-            <div *ngIf="url" class="btn waves-effect photo-upload" (click)="uploadPhoto()">
+            <div
+              *ngIf="url"
+              class="btn waves-effect photo-upload"
+              (click)="uploadPhoto()"
+            >
               <span
                 ><i class="material-icons center">cloud_upload</i> Upload
                 Photo</span
@@ -41,14 +58,16 @@
           </div>
         </div>
         <div class="row photos-div">
-          <div class="col s6 m4 l3" *ngFor="let item of [1, 2, 3, 4]">
+          <div class="col s6 m4 l3" *ngFor="let photo of photos">
             <div class="item-img-wrap center-align">
               <img
                 class="responsive-img"
-                src="http://placeimg.com/200/200/nature"
+                width="200"
+                height="200"
+                src="https://res.cloudinary.com/des1acmba/image/upload/v{{photo?.photoVersion}}/{{photo?.photoId}}"
               />
               <div class="row">
-                <button class="btn waves-effect prof-btn cyan darken-4">
+                <button class="btn waves-effect prof-btn" (click)="setAsProfile(photo)">
                   as profile
                 </button>
                 <button class="btn waves-effect del-btn orange darken-4">

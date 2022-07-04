@@ -16,19 +16,19 @@ import { TopStreamsComponent } from '../components/top-streams/top-streams.compo
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from '../services/token-interceptor';
 import { NgxAutoScrollModule } from "ngx-auto-scroll";
+import { SafePipe } from './safe.pipe';
 
 
 
 @NgModule({
-  declarations: [
+  declarations: [	
     NavbarComponent,
     SideComponent,
     TopStreamsComponent,
     PostComponent,
-    PostsComponent
-
-
-  ],
+    PostsComponent,
+      SafePipe
+   ],
   imports: [
     CommonModule,
     FormsModule,

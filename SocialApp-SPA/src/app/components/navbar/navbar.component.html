@@ -9,25 +9,19 @@
       >
       <ul class="right">
         <!-- Dropdown Trigger -->
-        <li
-          class="dropdown-trigger dt2"
-          data-target="dropdown2"
-          
-        >
+        <li class="dropdown-trigger dt2" data-target="dropdown2">
           <div class="notification">
             <i class="material-icons">mail</i>
-            <span
-              class="badge message-count"
-              *ngIf="count !== 0"
-              >{{ count }}</span
-            >
+            <span class="badge message-count" *ngIf="count !== 0">{{
+              count
+            }}</span>
           </div>
           <!-- Dropdown2 Structure -->
           <ul id="dropdown2" class="dropdown-content col s12 collection">
             <li
               class="collection-item avatar"
               *ngFor="let message of messages"
-               [hidden]="message.length === 0"
+              [hidden]="message.length === 0"
               (click)="openMessage(message[message.length - 1]?.senderId)"
             >
               <img class="circle" src="http://placeimg.com/200/200/nature" />
@@ -110,7 +104,10 @@
 
     <div class="nav-content">
       <div class="nav-div">
-        <img class="circle responsive-img" src="http://placeimg.com/100/100" />
+        <img
+          class="circle responsive-img"
+          [src]="photoUrl | safe"
+        />
       </div>
       <h1 class="profile-name">{{ currentUser?.username }}</h1>
     </div>

@@ -42,4 +42,13 @@
   position: relative;
   min-width: 92px;
   top: -9px;
+  background-color: #235789;
+}
+
+.preloader-wrapper {
+  margin-bottom: 74px;
+  margin-right: -61px;
+  top: 4px;
+  right: 153px;
+  
 }
