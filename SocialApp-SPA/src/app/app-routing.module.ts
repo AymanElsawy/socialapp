@@ -50,6 +50,11 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'profile/:id',
+    loadChildren: () => import('./components/view-profile/view-profile.module').then(m => m.ViewProfileModule),
+    canActivate: [AuthGuard]
+  },
+  {
     path: '**',
     redirectTo: 'streams',
   }

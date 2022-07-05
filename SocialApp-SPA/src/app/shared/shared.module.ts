@@ -57,6 +57,7 @@ import { SafePipe } from './safe.pipe';
     PostService,
     UserService,
     MessageService,
+    
     AlertifyService,
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
 })

@@ -145,7 +145,7 @@ module.exports = {
 
   async getAllMessages(req, res) {
     const { senderId, receiverId } = req.params; // get sender and receiver id from params
-    const conversation = await Conversation.find({
+    const conversation = await Conversation.findOne({
       // find conversation between sender and receiver
       $or: [
         {
@@ -164,7 +164,7 @@ module.exports = {
     }).select("_id"); // select conversation id
     if (conversation) {
       const message = await Message.findOne({
-        conversationId: conversation[0]._id, // get conversation id
+        conversationId: conversation._id, // get conversation id
       });
       res
         .status(Http.StatusCodes.OK)

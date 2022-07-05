@@ -1,6 +1,12 @@
 <ul class="collection" *ngFor="let post of posts">
   <li class="collection-item avatar">
-    <img src="http://placeimg.com/100/100/nature" alt="" class="circle" />
+    <img
+      [src]="
+        photoUrl + post?.user?.photoVersion + '/' + post?.user?.photoId | safe
+      "
+      alt=""
+      class="circle"
+    />
     <span class="title">{{ post.username }}</span>
     <p class="time">
       {{ timeAgo(post.createdAt) }}
@@ -27,9 +33,14 @@
             >thumb_up</i
           >
           <span class="icon-span">{{ post.totalLikes }}</span>
-          <i class="material-icons" [ngClass]="
+          <i
+            class="material-icons"
+            [ngClass]="
               !areYouLike(post.comments, user.username) ? 'notliked' : 'liked'
-            " (click)="goToComments(post)">comment</i>
+            "
+            (click)="goToComments(post)"
+            >comment</i
+          >
           <span class="icon-span">{{ post.comments.length }}</span>
         </div>
       </div>

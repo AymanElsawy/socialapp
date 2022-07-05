@@ -13,6 +13,8 @@ export class NotificationsComponent implements OnInit {
   currentUser;
   notifications = []; 
   socket;
+  photoUrl = 'https://res.cloudinary.com/des1acmba/image/upload/v';
+
 
   constructor(private tokenService: TokenService, private userService: UserService) { 
     this.socket = io('http://localhost:3000'); // connect to socket.io server

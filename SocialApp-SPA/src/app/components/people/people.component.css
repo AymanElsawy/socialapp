@@ -56,3 +56,7 @@
   border: 5px solid #eee;
   border-radius: 50%;
 }
+
+.pointer {
+  cursor: pointer;
+}

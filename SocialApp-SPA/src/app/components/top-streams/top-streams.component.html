@@ -1,6 +1,6 @@
 <ul class="collection" *ngFor="let post of topPosts">
   <li class="collection-item avatar">
-    <img src="http://placeimg.com/100/100/nature" alt="" class="circle" />
+    <img [src]="photoUrl+post?.user?.photoVersion+'/'+post?.user?.photoId | safe" alt="" class="circle" />
     <span class="title">{{ post.username }}</span>
     <p class="time">
       {{ timeAgo(post.createdAt) }}

@@ -20,11 +20,19 @@
           <ul id="dropdown2" class="dropdown-content col s12 collection">
             <li
               class="collection-item avatar"
-              *ngFor="let message of messages"
+              *ngFor="let message of messages; let i = index"
               [hidden]="message.length === 0"
               (click)="openMessage(message[message.length - 1]?.senderId)"
             >
-              <img class="circle" src="http://placeimg.com/200/200/nature" />
+              <img
+                class="circle"
+                [src]="
+                  photoUrl +
+                    chatList[i]?.receiverId?.photoVersion +
+                    '/' +
+                    chatList[i]?.receiverId?.photoId | safe
+                "
+              />
               <span class="title">
                 {{ message[message.length - 1]?.senderName }}
                 <p class="secondary-content">
@@ -70,7 +78,15 @@
               class="collection-item avatar"
               *ngFor="let notification of notifications"
             >
-              <img class="circle" src="http://placeimg.com/200/200/nature" />
+              <img
+                class="circle"
+                [src]="
+                  photoUrl +
+                    notification?.senderId?.photoVersion +
+                    '/' +
+                    notification?.senderId?.photoId | safe
+                "
+              />
               <span
                 class="title"
                 [ngStyle]="{
@@ -106,7 +122,10 @@
       <div class="nav-div">
         <img
           class="circle responsive-img"
-          [src]="photoUrl | safe"
+          [src]="
+            photoUrl + currentUser?.photoVersion + '/' + currentUser.photoId
+              | safe
+          "
         />
       </div>
       <h1 class="profile-name">{{ currentUser?.username }}</h1>

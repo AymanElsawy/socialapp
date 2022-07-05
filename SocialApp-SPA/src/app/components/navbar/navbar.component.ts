@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
   count = 0;
   photoVersion;
   photoId;
-  photoUrl: string;
+  photoUrl: string ="https://res.cloudinary.com/des1acmba/image/upload/v";
 
   constructor(
     private tokenService: TokenService,
@@ -88,7 +88,6 @@ export class NavbarComponent implements OnInit, AfterViewInit, OnDestroy {
     this.userService.getUser(this.currentUser._id).subscribe(data => {
       this.photoVersion = data['user'].photoVersion; // get photo version
       this.photoId = data['user'].photoId; // get photo id
-      this.photoUrl = 'https://res.cloudinary.com/des1acmba/image/upload/v' + this.photoVersion + "/" + this.photoId; // set photo url
       this.messages = [];
       this.notifications = data['user'].notifications.reverse(); // get current user notifications
       this.unreadNotifications = this.notifications.filter(

@@ -57,7 +57,7 @@ export class AlertifyService {
     // language resources 
     glossary: {
       // dialogs default title
-      title: 'AlertifyJS',
+      title: 'SocialApp',
       // ok button text
       ok: 'OK',
       // cancel button text

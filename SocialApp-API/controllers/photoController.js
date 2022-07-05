@@ -21,7 +21,6 @@ module.exports = {
         },
       },
       async (err, result) => {
-        console.log(result);
         await User.updateOne(
           { _id: req.user._id },
           {
@@ -47,5 +46,63 @@ module.exports = {
           });
       }
     );
+  },
+
+  setDefaultPhoto(req, res) {
+    // set default photo
+    const { photoVersion, photoId } = req.params;
+    User.updateOne(
+      { _id: req.user._id }, // update user by id
+      {
+        photoVersion: photoVersion, // set default photo version
+        photoId: photoId, // set default photo id
+      }
+    )
+      .then(() => {
+        return res
+          .status(Http.StatusCodes.OK)
+          .json({ message: "photo set as default" }); // 200 and update the profile
+      })
+      .catch((err) => {
+        return res
+          .status(Http.StatusCodes.INTERNAL_SERVER_ERROR)
+          .json({ message: "photo not set as default" }); // 500
+      });
+  },
+
+  deletePhoto(req, res) {
+    // delete photo
+    const { photoId } = req.params;
+    cloudinary.uploader.destroy(photoId, async (err, result) => { // delete photo from cloudinary
+      if (result.result === "ok") { // if photo deleted
+        await User.updateOne( // update user
+          { _id: req.user._id }, // update user by id
+          {
+            $pull: {
+              // pull photo from user
+              photos: {
+                // pull photo from user
+                photoId: photoId, // pull photo id
+              },
+            },
+          }
+        )
+          .then(() => {
+            return res
+              .status(Http.StatusCodes.OK)
+              .json({ message: "photo deleted" }); // 200 and update the profile
+          })
+          .catch((err) => {
+            return res
+              .status(Http.StatusCodes.INTERNAL_SERVER_ERROR)
+              .json({ message: "photo not deleted" }); // 500
+          });
+      }
+      if (err) {
+        return res // if error
+          .status(Http.StatusCodes.INTERNAL_SERVER_ERROR)
+          .json({ message: "photo not deleted" }); // 500
+      }
+    });
   },
 };

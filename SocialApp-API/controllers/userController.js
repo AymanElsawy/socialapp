@@ -28,6 +28,7 @@ module.exports = {
       .populate("following.userfollowed") // populate the following with the userfollowed
       .populate("chatList.receiverId") // populate the chatList with the receiverId
       .populate("chatList.messageId") // populate the chatList with the messageId
+      .populate('notifications.senderId') // populate the notifications with the sender id
       .then((user) => {
         return res
           .status(Http.StatusCodes.OK) // 200

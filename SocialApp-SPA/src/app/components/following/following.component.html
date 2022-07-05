@@ -11,7 +11,7 @@
                         <div class="card" *ngIf="currentUserFollowing.length > 0">
                             <a>
                                 <div class="card-image img-div">
-                                    <img class="circle responsive-img" src="http://placeimg.com/200/200/nature">
+                                    <img class="circle responsive-img" [src]="photoUrl+user?.userfollowed?.photoVersion+'/'+user?.userfollowed?.photoId">
                                 </div>
                             </a>
                             <div class="card-action">

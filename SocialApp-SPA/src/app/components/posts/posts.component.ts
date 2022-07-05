@@ -14,6 +14,7 @@ export class PostsComponent implements OnInit {
   posts = [];
   socket;
   user;
+  photoUrl ='https://res.cloudinary.com/des1acmba/image/upload/v'
 
   constructor(private postService: PostService, private tokenService:TokenService , private router:Router) {
     this.socket = io('http://localhost:3000'); // connect to socket.io server
@@ -29,8 +30,8 @@ export class PostsComponent implements OnInit {
 
   getPosts() {
     this.postService.getAllPosts().subscribe(data => {
-      console.log(data);
       this.posts = data.posts;
+      console.log(data);
     });
   } // get all posts from server
 

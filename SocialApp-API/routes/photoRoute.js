@@ -9,5 +9,15 @@ router.post(
   authHelper.verfyToken,
   photoController.uploadPhoto
 ); // follow user
+router.get(
+  "/set-as-profile/:photoVersion/:photoId",
+  authHelper.verfyToken,
+  photoController.setDefaultPhoto
+); // set photo as profile
+router.get(
+  "/delete-photo/:photoId",
+  authHelper.verfyToken,
+  photoController.deletePhoto
+); // delete photo
 
 module.exports = router;

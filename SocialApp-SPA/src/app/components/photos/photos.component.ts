@@ -82,6 +82,7 @@ export class PhotosComponent implements OnInit {
   }
 
   getUserPhotos() { 
+    this.photos = [];
     this.userService.getUser(this.currentUser._id).subscribe(
       data => { 
         this.photos = data['user'].photos; // get photos from user
@@ -104,6 +105,19 @@ export class PhotosComponent implements OnInit {
         console.log(err);
       }
     )
+  }
+  deletePhoto(photo) {
+    this.alertifyService.confirm('Are you sure you want to delete this photo?', () => { 
+      this.userService.deletePhoto(photo.photoId).subscribe(
+        data => {
+          this.alertifyService.success('Photo deleted successfully');
+          this.socket.emit('refresh', {}); // emit event to socket.io server
+        }, err => {
+          this.alertifyService.error('error in deleting photo');
+        }
+      )
+     })
+   
   }
 
 }

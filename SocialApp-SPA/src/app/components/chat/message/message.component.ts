@@ -26,6 +26,7 @@ export class MessageComponent implements OnInit, AfterViewInit, OnChanges {
   typing: boolean;
   typingMessage;
   isOnline: boolean;
+  photoUrl: string = "https://res.cloudinary.com/des1acmba/image/upload/v";
 
 
 

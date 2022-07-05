@@ -1,35 +1,52 @@
 <div class="animate__animated animate__flash">
-    <app-navbar></app-navbar>
-    <div class="container-fluid" style="margin-top: 10px">
+  <app-navbar></app-navbar>
+  <div class="container-fluid" style="margin-top: 10px">
+    <div class="row">
+      <div class="col s12 m4 l4 xl3">
+        <app-side></app-side>
+      </div>
+      <div class="col s12 m8 l8 xl9">
         <div class="row">
-            <div class="col s12 m4 l4 xl3">
-                <app-side></app-side>
-            </div>
-            <div class="col s12 m8 l8 xl9">
-                <div class="row">
-                    <div class="col s6 m4 l3" *ngFor="let user of currentUserFollowers">
-                        <div class="card" *ngIf="currentUserFollowers.length > 0">
-                            <a>
-                                <div class="card-image img-div">
-                                    <img class="circle responsive-img" src="http://placeimg.com/200/200/nature">
-                                </div>
-                            </a>
-                            <div class="card-action">
-                                <h3 class="card-title center-align">
-                                    {{user?.follower?.username}}
-                                </h3>
-                                    <a class="btn waves-effect btn-small" *ngIf="!isFollowed(user.follower._id)" (click)="followUser(user)">Follow</a>
-                                    <a class="btn waves-effect btn-small" *ngIf="isFollowed(user.follower._id)" (click)="unfollowUser(user)">unFollow</a>
-                                    <a><i class="material-icons right chat-icon">message</i></a>
-                                 </div>
-                        </div>
-                      
-                    </div>
-                      <div *ngIf="currentUserFollowers.length < 1 ">
-                            <h3>No followers  yet !! </h3>
-                        </div>
+          <div class="col s6 m4 l3" *ngFor="let user of currentUserFollowers">
+            <div class="card" *ngIf="currentUserFollowers.length > 0">
+              <a>
+                <div class="card-image img-div">
+                  <img
+                    class="circle responsive-img"
+                    [src]="
+                      photoUrl +
+                      user?.follower?.photoVersion +
+                      '/' +
+                      user?.follower?.photoId
+                    "
+                  />
                 </div>
+              </a>
+              <div class="card-action">
+                <h3 class="card-title center-align">
+                  {{ user?.follower?.username }}
+                </h3>
+                <a
+                  class="btn waves-effect btn-small"
+                  *ngIf="!isFollowed(user.follower._id)"
+                  (click)="followUser(user)"
+                  >Follow</a
+                >
+                <a
+                  class="btn waves-effect btn-small"
+                  *ngIf="isFollowed(user.follower._id)"
+                  (click)="unfollowUser(user)"
+                  >unFollow</a
+                >
+                <a><i class="material-icons right chat-icon">message</i></a>
+              </div>
             </div>
+          </div>
+          <div *ngIf="currentUserFollowers.length < 1">
+            <h3>No followers yet !!</h3>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>

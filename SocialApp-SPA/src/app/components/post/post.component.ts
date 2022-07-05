@@ -1,3 +1,4 @@
+import { TokenService } from 'src/app/services/token.service';
 import { PostService } from './../../services/post.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -11,12 +12,14 @@ import io from "socket.io-client";
 export class PostComponent implements OnInit {
   postForm: FormGroup;
   socket;
-  constructor(private fb: FormBuilder, private postService: PostService) { 
+  currentUser;
+  constructor(private fb: FormBuilder, private postService: PostService, private tokenService:TokenService) { 
     this.socket = io('http://localhost:3000'); // connect to socket.io server
   }
 
   ngOnInit(): void {
     this.init(); // initialize form 
+    this.currentUser = this.tokenService.getPayload(); // get user data
   }
   init() {
     this.postForm = this.fb.group({

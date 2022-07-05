@@ -15,6 +15,7 @@ export class FollowersComponent implements OnInit {
   currentUserFollowers = [];
   currentUserFollowing = [];
   socket;
+  photoUrl = 'https://res.cloudinary.com/des1acmba/image/upload/v';
   constructor(private userService: UserService, private tokenService: TokenService) {
     this.socket = io('http://localhost:3000'); // connect to socket.io server
 

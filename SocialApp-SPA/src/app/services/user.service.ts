@@ -38,6 +38,11 @@ export class UserService {
    // set as profile
   }
 
+  deletePhoto(photoId) {
+    return this.http.get(`${environment.api}/delete-photo/${photoId}`); // delete photo 
+  } // delete photo
+  
+
 }
 
 

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { TokenService } from 'src/app/services/token.service';
 import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
@@ -14,10 +15,12 @@ export class PeopleComponent implements OnInit {
   currentUserFollowing = []; 
   socket; 
   onlineUsers;
+
+  photoUrl = 'https://res.cloudinary.com/des1acmba/image/upload/v';
   
 
 
-  constructor(private userService: UserService, private tokenService: TokenService) { 
+  constructor(private userService: UserService, private tokenService: TokenService , private router:Router) { 
     this.socket = io('http://localhost:3000'); // connect to socket.io server
   }
 
@@ -77,5 +80,9 @@ export class PeopleComponent implements OnInit {
       return false; // set isOnline to false
     }
   } // check if online
+
+  viewProfile(user) {
+    this.router.navigate(['profile', user._id]); // navigate to profile page // view profile
+  }
   
 }

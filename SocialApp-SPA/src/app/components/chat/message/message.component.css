@@ -100,7 +100,7 @@ textarea,
 .chat-bubble.left {
   background: #f1d302;
   float: left;
-  margin-left: 2px;
+  margin-left: 5px;
 }
 
 .chat-bubble.right {
@@ -131,9 +131,7 @@ textarea,
 .left img {
   float: left;
   position: relative;
-  top: 20px;
-  width: 35px;
-
+  top: 18px;
 }
 
 .right {

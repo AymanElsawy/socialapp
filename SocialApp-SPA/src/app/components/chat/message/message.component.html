@@ -6,8 +6,10 @@
           <div class="col s8">
             <div class="col s12 receiver-img">
               <img
-                src="http://placeimg.com/100/100/nature"
+                [src]="photoUrl+receiverData?.photoVersion+'/'+receiverData?.photoId "
                 alt=""
+                width="100"
+                height="100"
                 class="circle"
               />
             </div>
@@ -55,7 +57,7 @@
             senderData.username != message.senderName
           "
         >
-          <img src="http://placeimg.com/50/50/nature" alt="" class="circle" />
+          <img  [src]="photoUrl+receiverData?.photoVersion+'/'+receiverData?.photoId " width="40" height="40" alt="" class="circle" />
           <div class="chat-bubble left">
             <div class="message">{{ message.body }}</div>
           </div>
@@ -71,7 +73,7 @@
           <span class="msg_time_send">{{ timeAgo(message.createdAt) }}</span>
           <img
             *ngIf="message.isRead"
-            src="http://placeimg.com/50/50/nature"
+            [src]="photoUrl+receiverData?.photoVersion+'/'+receiverData?.photoId " width="20" height="20"
             width="20"
             alt=""
             class="circle receiver-read"
