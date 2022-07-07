@@ -14,7 +14,7 @@ export class PostsComponent implements OnInit {
   posts = [];
   socket;
   user;
-  photoUrl ='https://res.cloudinary.com/des1acmba/image/upload/v'
+  photoUrl = 'https://res.cloudinary.com/des1acmba/image/upload/v';
 
   constructor(private postService: PostService, private tokenService:TokenService , private router:Router) {
     this.socket = io('http://localhost:3000'); // connect to socket.io server

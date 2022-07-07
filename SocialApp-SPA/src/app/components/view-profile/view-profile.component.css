@@ -1,0 +1,177 @@
+.container-fluid {
+  margin-top: 15px;
+}
+
+.tabs a {
+  color: #235789;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.tabs .active {
+  background: inherit !important;
+}
+
+#posts,
+#following,
+#followers {
+  position: relative;
+  top: 2.5rem;
+}
+
+.profile {
+  top: -30px;
+  position: relative;
+}
+
+.title {
+  font-weight: bold;
+  color: #235789;
+  font-size: 28px;
+}
+
+.cityName {
+  font-size: 17px;
+  color: #ffd166;
+  line-height: 20px;
+  margin-top: -31px;
+  font-weight: bold;
+}
+
+.profile-image {
+  margin-top: 15px;
+  border-radius: 16px;
+  border: solid 5px #235789;
+}
+
+@media only screen and (min-width: 600px) {
+  .profile-div {
+    width: 80%;
+  }
+}
+
+.container-fluid {
+  margin-top: 15px;
+}
+
+.tabs a {
+  color: #235789;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.tabs .active {
+  background: inherit !important;
+}
+
+#posts,
+#following,
+#followers {
+  position: relative;
+  top: 2.5rem;
+}
+
+.profile {
+  top: -30px;
+  position: relative;
+}
+
+.title {
+  font-weight: bold;
+  color: #235789;
+  font-size: 28px;
+}
+
+.cityName {
+  font-size: 17px;
+  color: #ffd166;
+  line-height: 20px;
+  margin-top: -31px;
+  font-weight: bold;
+}
+
+.profile-image {
+  margin-top: 47px;
+  width: 250px;
+  height: 250px;
+  border-radius: 16px;
+  border: solid 5px #235789;
+}
+
+@media only screen and (min-width: 600px) {
+  .profile-div {
+    width: 90%;
+  }
+}
+
+
+/* posts tab styles */
+.edit {
+  float: right;
+  right: 61px;
+  font-size: 24px !important;
+  top: 10px;
+}
+
+.delete {
+  float: right;
+  color: #b71c1c;
+  top: 10px;
+}
+
+.time {
+  font-size: 14px;
+  color: #ffd166;
+}
+
+.post-text {
+  padding: 15px 5px !important;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.post-image {
+  margin-top: -26px;
+  width: 500px;
+  height: 500px;
+  object-fit: cover;
+}
+
+.icon-Span {
+  font-size: 22px;
+  margin-right: 10px;
+}
+
+.avatar {
+  margin-left: -12px !important;
+  padding-left: 65px !important;
+}
+
+.icon {
+  display: inline-flex;
+  vertical-align: top;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+
+.card-image {
+  top: 7px;
+}
+
+.card-action {
+  border: none !important;
+  padding-top: 0 !important;
+  margin-left: -25px !important;
+}
+
+.collection {
+  border: none !important;
+  margin: -20px 0;
+
+}
+
+.collection .collection-item {
+  padding-right: 1px !important;
+}
+

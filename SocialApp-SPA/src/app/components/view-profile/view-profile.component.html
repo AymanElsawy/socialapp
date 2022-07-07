@@ -1,1 +1,79 @@
-<h1>view-profile works!</h1>
+<div class="animate__animated animate__fadeIn">
+  <app-navbar></app-navbar>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col s12 m5 l3">
+        <div class="center-align ">
+          <img class="responsive-img profile-image" [src]="photoUrl+userData?.photoVersion+'/'+userData?.photoId" alt="">
+          <div class="profile">
+            <p class="title">{{userData?.username}}</p>
+            <p class="cityName">City,Country</p>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m7 l9">
+        <div class="row profile-div">
+          <div class="col s12">
+            <ul class="tabs tabs-fixed-width">
+              <li class="tab"><a class="active" href="#posts">Posts</a></li>
+              <li class="tab"><a href="#following">Following</a></li>
+              <li class="tab"><a href="#followers">Followers</a></li>
+
+            </ul>
+          </div>
+
+          <!-- Posts Tab -->
+          <div id="posts" class="col s12">
+            
+            <ul class="collection" *ngFor="let post of posts">
+              <li class="collection-item avatar">
+                <img [src]="photoUrl+userData?.photoVersion+'/'+userData?.photoId" alt="" class="circle">
+                <span class="title">{{post?.postId?.username}}</span>
+                <i class="material-icons title edit waves-effect">
+                  edit
+                </i>
+                <i class="material-icons delete waves-effect">
+                  delete
+                </i>
+                <p class="time">{{timeAgo(post?.createdAt)}}
+                </p>
+              </li>
+              <div class="row">
+                <div class="col s12">
+                  <div class="card">
+                    <div class="card-image">
+                      <img class="post-image" src="http://placeimg.com/500/500/nature" alt="post image">
+                    </div>
+                    <div class="card-content post-text">
+                      <p>{{post?.postId?.post}} </p>
+                    </div>
+                    <div class="card-action">
+                      <i class="material-icons icon">thumb_up</i>
+                      <span class="icon-span">{{post?.postId?.totalLikes}}</span>
+                      <i class="material-icons icon">comment</i>
+                      <span class="icon-span">{{post?.postId?.comments.length}}</span>
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+            </ul>
+       
+          </div>
+
+          <!-- Following Tab -->
+          <div id="following" class="col s12">
+            Following here
+          </div>
+
+          <!-- Followers Tab -->
+          <div id="followers" class="col s12">
+            Followers here
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
