@@ -19,6 +19,7 @@ export class CommentsComponent implements OnInit, AfterViewInit {
   p: number = 1;
   socket;
   socketHost;
+  photoUrl = 'https://res.cloudinary.com/des1acmba/image/upload/v';
   constructor(private fb: FormBuilder, private route: ActivatedRoute, private postService: PostService) { 
     this.socketHost = 'http://localhost:3000'; // set socket host
     this.socket = io(this.socketHost);  // connect to socket
@@ -56,9 +57,9 @@ export class CommentsComponent implements OnInit, AfterViewInit {
 
   getAllComments() {
     this.postService.getPostComments(this.postId).subscribe(data => {
-      console.log(data);
       this.comments = data.post.comments.reverse(); // get all comments
       this.post = data.post; // get post data
+      console.log(this.post);
     });
   } // get all comments
 

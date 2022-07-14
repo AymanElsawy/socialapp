@@ -4,6 +4,8 @@ const postSchema = mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, // user id
   username: { type: String, default: "" }, // username of the user who created the post
   post: { type: String, default: "" }, // the post
+  photoVersion: { type: String, default: "" }, // the photo version
+  photoId: { type: String, default: "" }, // the photo id
   comments: [
     {
       userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },

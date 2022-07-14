@@ -20,7 +20,7 @@ form {
 .photo-btn {
   height: 36px;
   line-height: 2.5rem;
-  padding: 0 16px;
+  padding: 0 6px;
   margin-top: 7px;
   font-size: 18px;
 }
@@ -40,4 +40,23 @@ form {
 }
 .file-field input[type="file"] {
   width: 70% !important;
+}
+
+.post-photo {
+  width: 70px;
+  height: 70px;
+  border-radius: 10px;
+  position: absolute;
+  top: -1.8vw;
+  right: 0;
+  object-fit: cover;
+}
+
+.progress {
+  margin: 0;
+  background-color: #235789 !important;
+}
+
+.indeterminate {
+  background-color: #ffd166 !important;
 }

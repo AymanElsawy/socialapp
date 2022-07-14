@@ -3,10 +3,15 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col s12 m5 l3">
-        <div class="center-align ">
-          <img class="responsive-img profile-image" [src]="photoUrl+userData?.photoVersion+'/'+userData?.photoId" alt="">
+        <div class="center-align">
+          <img
+            *ngIf="userData?.photoId"
+            class="responsive-img profile-image"
+            [src]="photoUrl + userData?.photoVersion + '/' + userData?.photoId"
+            alt=""
+          />
           <div class="profile">
-            <p class="title">{{userData?.username}}</p>
+            <p class="title">{{ userData?.username }}</p>
             <p class="cityName">City,Country</p>
           </div>
         </div>
@@ -18,62 +23,90 @@
               <li class="tab"><a class="active" href="#posts">Posts</a></li>
               <li class="tab"><a href="#following">Following</a></li>
               <li class="tab"><a href="#followers">Followers</a></li>
-
             </ul>
           </div>
 
           <!-- Posts Tab -->
           <div id="posts" class="col s12">
-            
             <ul class="collection" *ngFor="let post of posts">
               <li class="collection-item avatar">
-                <img [src]="photoUrl+userData?.photoVersion+'/'+userData?.photoId" alt="" class="circle">
-                <span class="title">{{post?.postId?.username}}</span>
-                <i class="material-icons title edit waves-effect">
-                  edit
-                </i>
-                <i class="material-icons delete waves-effect">
-                  delete
-                </i>
-                <p class="time">{{timeAgo(post?.createdAt)}}
-                </p>
+                <img
+                  [src]="
+                    photoUrl + userData?.photoVersion + '/' + userData?.photoId
+                  "
+                  alt=""
+                  class="circle"
+                />
+                <span class="title">{{ post?.postId?.username }}</span>
+                <i class="material-icons title edit waves-effect" *ngIf="currentUser._id === userId"> edit </i>
+                <i class="material-icons delete waves-effect" *ngIf="currentUser._id === userId"> delete </i>
+                <p class="time">{{ timeAgo(post?.createdAt) }}</p>
               </li>
               <div class="row">
                 <div class="col s12">
                   <div class="card">
-                    <div class="card-image">
-                      <img class="post-image" src="http://placeimg.com/500/500/nature" alt="post image">
+                    <div class="card-image" *ngIf="post.postId.photoId">
+                      <img
+                        [src]="
+                          photoUrl + post?.postId.photoVersion + '/' + post?.postId.photoId
+                            
+                        "
+                        alt="post image"
+                      />
                     </div>
-                    <div class="card-content post-text">
-                      <p>{{post?.postId?.post}} </p>
+                    <p class="post-title" *ngIf="!post.postId.photoVersion">
+                      {{ post?.postId.post }}
+                    </p>
+                    <div
+                      class="card-content post-text"
+                      *ngIf="post.postId.photoVersion"
+                    >
+                      <p>{{ post?.postId.post }}</p>
                     </div>
                     <div class="card-action">
-                      <i class="material-icons icon">thumb_up</i>
-                      <span class="icon-span">{{post?.postId?.totalLikes}}</span>
-                      <i class="material-icons icon">comment</i>
-                      <span class="icon-span">{{post?.postId?.comments.length}}</span>
+                      <i
+                        class="material-icons icon"
+                        (click)="likePost(post)"
+                        [ngClass]="
+                          !areYouLike(post?.postId.likes, currentUser?.username)
+                            ? 'notliked'
+                            : 'liked'
+                        "
+                        >thumb_up</i
+                      >
+                      <span class="icon-span">{{
+                        post?.postId?.totalLikes
+                      }}</span>
+                      <i
+                        class="material-icons icon"
+                        [ngClass]="
+                          !areYouLike(
+                            post?.postId?.comments,
+                            currentUser.username
+                          )
+                            ? 'notliked'
+                            : 'liked'
+                        "
+                        (click)="goToComments(post?.postId)"
+                        >comment</i
+                      >
+                      <span class="icon-span">{{
+                        post?.postId?.comments.length
+                      }}</span>
                     </div>
                   </div>
-
                 </div>
-
               </div>
             </ul>
-       
           </div>
 
           <!-- Following Tab -->
-          <div id="following" class="col s12">
-            Following here
-          </div>
+          <div id="following" class="col s12">Following here</div>
 
           <!-- Followers Tab -->
-          <div id="followers" class="col s12">
-            Followers here
-          </div>
+          <div id="followers" class="col s12">Followers here</div>
         </div>
       </div>
-
     </div>
   </div>
 </div>

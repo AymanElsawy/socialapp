@@ -1,7 +1,7 @@
 <nav class="nav-extended">
   <div class="container">
     <div class="nav-wrapper">
-      <a routerLink="/streams" class="brand-logo"
+      <a routerLink="/" class="brand-logo"
         ><img src="assets/images/logo.png"
       /></a>
       <a data-target="mobile" class="sidenav-trigger"
@@ -24,8 +24,8 @@
               [hidden]="message.length === 0"
               (click)="openMessage(message[message.length - 1]?.senderId)"
             >
-              <img
-                class="circle"
+              <img 
+                class="circle "
                 [src]="
                   photoUrl +
                     chatList[i]?.receiverId?.photoVersion +
@@ -121,7 +121,7 @@
     <div class="nav-content">
       <div class="nav-div">
         <img
-          class="circle responsive-img"
+          class="circle responsive-img animate__animated animate__fadeInDown"
           [src]="
             photoUrl + currentUser?.photoVersion + '/' + currentUser.photoId
               | safe

@@ -3,12 +3,23 @@ const Http = require("http-status-codes");
 const PostModel = require("../models/postModel");
 const UserModel = require("../models/userModel");
 const moment = require("moment");
+const cloudinary = require("cloudinary").v2;
+
+cloudinary.config({
+  cloud_name: "des1acmba",
+  api_key: "496223554377871",
+  api_secret: "1R2NKLhcDAdMxgj4qTEVGy2C73c",
+});
+
 module.exports = {
   addPost(req, res) {
     const schema = Joi.object({
       post: Joi.string().required(),
     }); // validation schema
-    const { err } = schema.validate(req.body); // validation result
+    const postBody = {
+      post: req.body.post, // the post
+    };
+    const { err } = schema.validate(postBody); // validation result
     if (err) {
       return res
         .status(Http.StatusCodes.NOT_FOUND)
@@ -20,31 +31,75 @@ module.exports = {
       username: req.user.username, // this is the user who is logged in
       createdAt: new Date(), // new Date() is the current date and time
     };
-    PostModel.create(newPost)
-      .then(async (post) => {
-        await UserModel.findByIdAndUpdate(req.user._id, {
-          $push: {
-            posts: {
-              postId: post._id,
-              post: post.post || req.body.post,
-              createdAt: post.createdAt,
-            }, // push the post to the user's posts array
+
+    if (req.body.post && !req.body.photo) {
+      PostModel.create(newPost)
+        .then(async (post) => {
+          await UserModel.findByIdAndUpdate(req.user._id, {
+            $push: {
+              posts: {
+                postId: post._id,
+                post: post.post || req.body.post,
+                createdAt: post.createdAt,
+              }, // push the post to the user's posts array
+            },
+          }); // push the post id to the user's posts array
+          return res
+            .status(Http.StatusCodes.CREATED)
+            .json({ message: "post created", post }); // 201 and the post created
+        })
+        .catch((err) => {
+          return res
+            .status(Http.StatusCodes.INTERNAL_SERVER_ERROR)
+            .json({ message: err.message }); // 500
+        });
+    }
+    if (req.body.post && req.body.photo) {
+      cloudinary.uploader.upload(
+        req.body.photo,
+        {
+          transformation: {
+            width: 500, // width of the photo
+            height: 400, // height of the photo
           },
-        }); // push the post id to the user's posts array
-        return res
-          .status(Http.StatusCodes.CREATED)
-          .json({ message: "post created", post }); // 201 and the post created
-      })
-      .catch((err) => {
-        return res
-          .status(Http.StatusCodes.INTERNAL_SERVER_ERROR)
-          .json({ message: err.message }); // 500
-      });
+        },
+        async (err, result) => {
+          const newPost = {
+            post: req.body.post, //req.body.post is the post from the client
+            photoVersion: result.version, // push photo version
+            photoId: result.public_id, // push photo id
+            user: req.user._id, // user is the id of the user who is logged in
+            username: req.user.username, // this is the user who is logged in
+            createdAt: new Date(), // new Date() is the current date and time
+          };
+          PostModel.create(newPost)
+            .then(async (post) => {
+              await UserModel.findByIdAndUpdate(req.user._id, {
+                $push: {
+                  posts: {
+                    postId: post._id,
+                    post: post.post || req.body.post,
+                    createdAt: post.createdAt,
+                  }, // push the post to the user's posts array
+                },
+              }); // push the post id to the user's posts array
+              return res
+                .status(Http.StatusCodes.CREATED)
+                .json({ message: "post created", post }); // 201 and the post created
+            })
+            .catch((err) => {
+              return res
+                .status(Http.StatusCodes.INTERNAL_SERVER_ERROR)
+                .json({ message: err.message }); // 500
+            });
+        }
+      );
+    }
   },
 
   getAllPosts(req, res) {
     try {
-      const currentDate = moment().startOf('day'); // start of the day
+      const currentDate = moment().startOf("day"); // start of the day
       const endDate = moment(currentDate).subtract(1, "day"); // 2 days ago
       PostModel.find()
         .sort({ createdAt: -1 }) // sort the posts in descending order by createdAt
@@ -130,6 +185,7 @@ module.exports = {
     const id = req.params.id; // the id of the post that is being commented on
     PostModel.findById(id)
       .populate("comments.userId") // populate the userId field with the user's data
+      .populate('user')
       .then((post) => {
         return res
           .status(Http.StatusCodes.OK)

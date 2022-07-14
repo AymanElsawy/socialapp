@@ -9,7 +9,8 @@
         <ul class="collection">
           <li class="collection-item avatar">
             <img
-              src="http://placeimg.com/100/100/nature"
+              [src]="
+                photoUrl + post?.user.photoVersion + '/' + post?.user.photoId"
               alt=""
               class="circle"
             />
@@ -18,16 +19,15 @@
           </li>
         </ul>
         <div class="card">
-          <div class="card-image">
+          <div class="card-image" *ngIf="post?.photoId">
             <img
-              class="post-image"
-              src="http://placeimg.com/400/300/nature"
+              [src]="photoUrl + post?.photoVersion + '/' + post?.photoId"
               alt="post image"
             />
           </div>
-          <div class="card-content post-content">
-            <p class="post-text">{{ post?.post }}</p>
-          </div>
+          <p class="post-title" *ngIf="!post?.photoVersion">
+            {{ post?.post }}
+          </p>
         </div>
       </div>
       <div class="row">
@@ -51,7 +51,10 @@
       <div class="row comments">
         <ul
           class="collection comment col s12 m10"
-          *ngFor="let comment of comments  | paginate: { itemsPerPage: 5, currentPage: p }"
+          *ngFor="
+            let comment of comments
+              | paginate: { itemsPerPage: 5, currentPage: p }
+          "
         >
           <li class="collection-item avatar">
             <img class="circle" src="http://placeimg.com/100/100/nature" />
@@ -61,8 +64,11 @@
           </li>
         </ul>
       </div>
- <pagination-controls (pageChange)="p = $event" class="moka"></pagination-controls>
-     <!-- marg marg1 ng-margin removecontent-next removecontent-previous my-button my-pagination my-pag -->
+      <pagination-controls
+        (pageChange)="p = $event"
+        class="moka"
+      ></pagination-controls>
+      <!-- marg marg1 ng-margin removecontent-next removecontent-previous my-button my-pagination my-pag -->
     </div>
   </div>
 </div>
